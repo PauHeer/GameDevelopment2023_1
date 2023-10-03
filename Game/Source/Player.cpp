@@ -32,7 +32,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 16, position.y - 16, 37, 72, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -62,7 +62,7 @@ bool Player::Update(float dt)
 	if (Jumping != true)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			pbody->body->ApplyLinearImpulse({ 0, -2.8f}, pbody->body->GetWorldCenter(), true);
+			pbody->body->ApplyLinearImpulse({ 0, -9.0f}, pbody->body->GetWorldCenter(), true);
 			Jumping = true;
 		}
 	}
@@ -74,8 +74,8 @@ bool Player::Update(float dt)
 	}
 	
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 20;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 35;
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
