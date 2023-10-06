@@ -178,19 +178,19 @@ bool Map::Load()
     
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
+    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC, ColliderType::PLATFORM);
     c1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
+    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC, ColliderType::PLATFORM);
     c2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC, ColliderType::PLATFORM);
     c3->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c4 = app->physics->CreateRectangle(32, 384, 64, 768, STATIC);
+    PhysBody* c4 = app->physics->CreateRectangle(32, 384, 64, 768, STATIC, ColliderType::PLATFORM);
     c4->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c5 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC);
+    PhysBody* c5 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC, ColliderType::PLATFORM);
     c5->ctype = ColliderType::PLATFORM;
     
     if(ret == true)

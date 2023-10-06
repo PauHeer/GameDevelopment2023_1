@@ -72,11 +72,12 @@ bool Physics::PreUpdate()
 	return ret;
 }
 
-PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType type)
+PhysBody* Physics::CreateRectangle(int x, int y, int width, int height, bodyType type, ColliderType ctype)
 {
 	b2BodyDef body;
 
-	if (type == DYNAMIC) body.type = b2_dynamicBody;
+	if (type == DYNAMIC && ctype == ColliderType::PLAYER) { body.fixedRotation = true, body.type = b2_dynamicBody; }
+	if (type == DYNAMIC && (ctype == ColliderType::ITEM || ctype == ColliderType::PLATFORM)) body.type = b2_dynamicBody;
 	if (type == STATIC) body.type = b2_staticBody;
 	if (type == KINEMATIC) body.type = b2_kinematicBody;
 

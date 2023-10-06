@@ -32,7 +32,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x + 16, position.y - 16, 37, 72, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 16, position.y - 16, 37, 72, bodyType::DYNAMIC, ColliderType::PLAYER);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
