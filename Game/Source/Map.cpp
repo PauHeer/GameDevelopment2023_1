@@ -177,28 +177,52 @@ bool Map::Load()
     }
     
     // NOTE: Later you have to create a function here to load and create the colliders from the map
+    //Platforms
+    PhysBody* p1 = app->physics->CreateRectangle(224 + 128, 544 + 16, 256, 32, STATIC, ColliderType::PLATFORM);
+    p1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC, ColliderType::PLATFORM);
-    c1->ctype = ColliderType::PLATFORM;
+    PhysBody* island1 = app->physics->CreateRectangle(384 + 16, 384 + 16, 96, 32, STATIC, ColliderType::PLATFORM);
+    island1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC, ColliderType::PLATFORM);
-    c2->ctype = ColliderType::PLATFORM;
+    PhysBody* island2 = app->physics->CreateRectangle(384 + 16, 384 + 32, 32, 64, STATIC, ColliderType::PLATFORM);
+    island2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c6 = app->physics->CreateRectangle(640 - 16, 384 - 16, 96, 32, STATIC, ColliderType::PLATFORM);
-    c6->ctype = ColliderType::PLATFORM;
+    PhysBody* circleIsland1 = app->physics->CreateCircle(384, 416, 32, bodyType::STATIC);
+    circleIsland1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c7 = app->physics->CreateRectangle(832, 480 - 16, 256, 32, STATIC, ColliderType::PLATFORM);
-    c7->ctype = ColliderType::PLATFORM;
+    PhysBody* circleIsland2 = app->physics->CreateCircle(416, 416, 32, bodyType::STATIC);
+    circleIsland2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c4 = app->physics->CreateRectangle(32, 384, 64, 768, STATIC, ColliderType::PLATFORM);
-    c4->ctype = ColliderType::PLATFORM;
+    PhysBody* p3 = app->physics->CreateRectangle(640 - 16, 384 - 16, 96, 32, STATIC, ColliderType::PLATFORM);
+    p3->ctype = ColliderType::PLATFORM;
+
+    PhysBody* p4 = app->physics->CreateRectangle(832, 480 - 16, 256, 32, STATIC, ColliderType::PLATFORM);
+    p4->ctype = ColliderType::PLATFORM;
+
+    PhysBody* p5 = app->physics->CreateRectangle(896 + 64, 576 + 16, 256, 32, STATIC, ColliderType::PLATFORM);
+    p5->ctype = ColliderType::PLATFORM;
+
+    PhysBody* p6 = app->physics->CreateRectangle(864 -16, 256 - 16, 32, 32, STATIC, ColliderType::PLATFORM);
+    p6->ctype = ColliderType::PLATFORM;
+
+    PhysBody* p7 = app->physics->CreateRectangle(128 - 16, 448 - 16, 96, 32, STATIC, ColliderType::PLATFORM);
+    p7->ctype = ColliderType::PLATFORM;
+
+    //Walls
+    PhysBody* w1 = app->physics->CreateRectangle(32, 384, 64, 640, STATIC, ColliderType::PLATFORM);
+    w1->ctype = ColliderType::PLATFORM;
+    PhysBody* w2 = app->physics->CreateRectangle(2016, 384, 64, 640, STATIC, ColliderType::PLATFORM);
+    w2->ctype = ColliderType::PLATFORM;
 
     //Floor
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC, ColliderType::PLATFORM);
+    PhysBody* c3 = app->physics->CreateRectangle(256 + 16, 704 + 32, 544, 64, STATIC, ColliderType::PLATFORM);
     c3->ctype = ColliderType::PLATFORM;
     
-    PhysBody* c5 = app->physics->CreateRectangle(928, 704 + 32, 576, 64, STATIC, ColliderType::PLATFORM);
+    PhysBody* c5 = app->physics->CreateRectangle(1344, 704 + 32, 1408, 64, STATIC, ColliderType::PLATFORM);
     c5->ctype = ColliderType::PLATFORM;
+
+    PhysBody* roof = app->physics->CreateRectangle(1024, 32, 2048, 64, STATIC, ColliderType::PLATFORM);
+    roof->ctype = ColliderType::PLATFORM;
     
     if(ret == true)
     {

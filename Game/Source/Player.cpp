@@ -28,7 +28,7 @@ bool Player::Awake() {
 }
 
 bool Player::Start() {
-
+	
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
@@ -74,8 +74,8 @@ bool Player::Update(float dt)
 	}
 	
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 20;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 35;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
