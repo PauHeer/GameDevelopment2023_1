@@ -62,7 +62,7 @@ bool Player::Update(float dt)
 	if (Jumping != true)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			pbody->body->ApplyLinearImpulse({ 0, -6.4f}, pbody->body->GetWorldCenter(), true);
+			pbody->body->ApplyLinearImpulse({ 0, -7.0f}, pbody->body->GetWorldCenter(), true);
 			Jumping = true;
 		}
 	}
