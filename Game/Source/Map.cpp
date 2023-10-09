@@ -199,7 +199,7 @@ bool Map::Load()
     PhysBody* p4 = app->physics->CreateRectangle(832, 480 - 16, 256, 32, STATIC, ColliderType::PLATFORM);
     p4->ctype = ColliderType::PLATFORM;
 
-    PhysBody* p5 = app->physics->CreateRectangle(896 + 64, 576 + 16, 256, 32, STATIC, ColliderType::PLATFORM);
+    PhysBody* p5 = app->physics->CreateRectangle(928 + 16, 576 + 16, 224, 32, STATIC, ColliderType::PLATFORM);
     p5->ctype = ColliderType::PLATFORM;
 
     PhysBody* p6 = app->physics->CreateRectangle(864 -16, 256 - 16, 32, 32, STATIC, ColliderType::PLATFORM);
