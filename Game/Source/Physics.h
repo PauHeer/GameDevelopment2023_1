@@ -75,6 +75,7 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+	b2World* world;
 
 private:
 
@@ -82,5 +83,5 @@ private:
 	bool debug;
 
 	// Box2D World
-	b2World* world;
+	/*b2World* world;*/
 };

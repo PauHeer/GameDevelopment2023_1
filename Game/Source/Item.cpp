@@ -31,6 +31,7 @@ bool Item::Start() {
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 8, bodyType::STATIC);
 	pbody->ctype = ColliderType::ITEM;
+	pbody->listener = this;
 
 	return true;
 }
@@ -42,11 +43,27 @@ bool Item::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	app->render->DrawTexture(texture, position.x, position.y);
-
+	if (isPicked == true)
+	{
+		app->entityManager->DestroyEntity(this);
+		app->physics->world->DestroyBody(pbody->body);
+	}
 	return true;
 }
 
 bool Item::CleanUp()
 {
 	return true;
+}
+void Item::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		pbody->body->SetActive(false);
+		isPicked = true;
+		break;
+
+	}
 }
