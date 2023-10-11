@@ -81,7 +81,8 @@ bool Player::Update(float dt)
 	//Update camera position
 	app->win->GetWindowSize(windowW, windowH);
 	int center = windowW / 2;
-	app->render->camera.x = center - position.x;
+	if (center - position.x < 0) app->render->camera.x = center - position.x;
+
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
