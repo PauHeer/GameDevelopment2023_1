@@ -50,10 +50,11 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		//
 	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		//
+			vel.y = 10.0f;
 	}
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel.x = (-speed*dt);
 	}
@@ -65,7 +66,11 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 			vel.y = -10.0f;
-			Jumping = true;
+			jumpCounter++;
+			if (jumpCounter > 1)
+			{
+				Jumping = true;
+			}
 		}
 	}
 
@@ -106,6 +111,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		Jumping = false;
+		jumpCounter = 0;
 		LOG("Collision PLATFORM");
 		break;
 	case ColliderType::WALL:

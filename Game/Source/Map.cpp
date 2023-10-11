@@ -209,9 +209,9 @@ bool Map::Load()
     p7->ctype = ColliderType::PLATFORM;
 
     //Walls
-    PhysBody* w1 = app->physics->CreateRectangle(32, 384, 64, 640, STATIC, ColliderType::WALL);
+    PhysBody* w1 = app->physics->CreateRectangle(32, 384, 64, 2000, STATIC, ColliderType::WALL);
     w1->ctype = ColliderType::WALL;
-    PhysBody* w2 = app->physics->CreateRectangle(2016, 384, 64, 640, STATIC, ColliderType::WALL);
+    PhysBody* w2 = app->physics->CreateRectangle(2016, 384, 64, 2000, STATIC, ColliderType::WALL);
     w2->ctype = ColliderType::WALL;
 
     //Floor
@@ -221,7 +221,7 @@ bool Map::Load()
     PhysBody* c5 = app->physics->CreateRectangle(1344, 704 + 32, 1408, 64, STATIC, ColliderType::PLATFORM);
     c5->ctype = ColliderType::PLATFORM;
 
-    PhysBody* roof = app->physics->CreateRectangle(1024, 32, 2048, 64, STATIC, ColliderType::PLATFORM);
+    PhysBody* roof = app->physics->CreateRectangle(1024, -500, 2048, 64, STATIC, ColliderType::PLATFORM);
     roof->ctype = ColliderType::PLATFORM;
     
     if(ret == true)
