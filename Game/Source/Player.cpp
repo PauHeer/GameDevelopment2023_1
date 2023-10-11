@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Window.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -77,6 +78,11 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
 
+	//Update camera position
+	app->win->GetWindowSize(windowW, windowH);
+	int center = windowW / 2;
+	app->render->camera.x = center - position.x;
+
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
@@ -99,6 +105,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		Jumping = false;
 		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::WALL:
+		LOG("Collision WALL");
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

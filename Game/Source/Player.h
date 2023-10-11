@@ -32,6 +32,7 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
+	uint windowW, windowH;
 	int pickCoinFxId;
 };
 
