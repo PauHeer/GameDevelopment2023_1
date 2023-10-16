@@ -141,10 +141,11 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	return pbody;
 }
 
-PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type)
+PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type, ColliderType ctype)
 {
 	// Create BODY at position x,y
 	b2BodyDef body;
+	if (type == DYNAMIC && ctype == ColliderType::PLAYER) { body.fixedRotation = true, body.type = b2_dynamicBody; }
 	if (type == DYNAMIC) body.type = b2_dynamicBody;
 	if (type == STATIC) body.type = b2_staticBody;
 	if (type == KINEMATIC) body.type = b2_kinematicBody;
@@ -326,6 +327,16 @@ void Physics::BeginContact(b2Contact* contact)
 	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	/*
+	if (physA->ctype == ColliderType::PLAYER && physB->ctype == ColliderType::PLATFORM) {
+		// Desactivar el collider de la plataforma
+		contact->GetFixtureB()->SetSensor(true);
+	}
+	else if (physA->ctype == ColliderType::PLATFORM && physB->ctype == ColliderType::PLAYER) {
+		// Desactivar el collider de la plataforma
+		contact->GetFixtureA()->SetSensor(true);
+	}*/
 
 	if (physA && physA->listener != NULL)
 		physA->listener->OnCollision(physA, physB);

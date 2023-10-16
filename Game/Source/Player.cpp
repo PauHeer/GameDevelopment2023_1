@@ -34,6 +34,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateRectangle(position.x -288, position.y + 320, 32, 60, bodyType::DYNAMIC, ColliderType::PLAYER);
+	sensor = app->physics->CreateRectangleSensor(position.x - 288, position.y + 320, 32, 60, bodyType::DYNAMIC, ColliderType::PLAYER);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -85,9 +86,8 @@ bool Player::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
 
 	//Update camera position
-	app->win->GetWindowSize(windowW, windowH);
-	int center = windowW / 2;
-	if (center - position.x < 0) app->render->camera.x = center - position.x;
+	int center = app->win->screenSurface->w/2;
+	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = center - position.x;
 
 
 	app->render->DrawTexture(texture, position.x, position.y);
