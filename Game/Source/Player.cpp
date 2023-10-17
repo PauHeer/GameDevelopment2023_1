@@ -34,7 +34,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	pbody = app->physics->CreateRectangle(position.x -288, position.y + 320, 32, 60, bodyType::DYNAMIC, ColliderType::PLAYER);
-	sensor = app->physics->CreateRectangleSensor(position.x - 288, position.y + 320, 32, 60, bodyType::DYNAMIC, ColliderType::PLAYER);
+	sensor = app->physics->CreateRectangleSensor(position.x - 288, position.y + 320, 32, 60, bodyType::KINEMATIC, ColliderType::PLAYER);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -66,7 +66,7 @@ bool Player::Update(float dt)
 	if (Jumping != true)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			vel.y = -10.0f;
+			vel.y = -9.0f;
 			jumpCounter++;
 			if (jumpCounter > 1)
 			{
