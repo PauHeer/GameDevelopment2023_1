@@ -1,4 +1,3 @@
-
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -182,92 +181,31 @@ bool Map::Load()
 
     //COLLIDERS CREATIONS
 
-    
-    //Platforms
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
 
-    PhysBody* ptf1_ptf = app->physics->CreateRectangle(224 + 128, 544 + 8, 254, 16, STATIC);
-    ptf1_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* ptf1 = app->physics->CreateRectangle(224 + 128, 544 + 16, 256, 32, STATIC);
-    ptf1->ctype = ColliderType::WALL;
+    while (mapLayerItem != NULL) {
 
-    PhysBody* ptf2_ptf = app->physics->CreateRectangle(928 + 16, 576 + 8, 222, 16, STATIC);
-    ptf2_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* ptf2 = app->physics->CreateRectangle(928 + 16, 576 + 16, 224, 32, STATIC);
-    ptf2->ctype = ColliderType::WALL;
+        if (mapLayerItem->data->properties.GetProperty("Collisions") != NULL && mapLayerItem->data->properties.GetProperty("Collisions")->value) {
 
-    PhysBody* ptf3_ptf = app->physics->CreateRectangle(864 - 16, 256 - 24, 30, 16, STATIC);
-    ptf3_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* ptf3 = app->physics->CreateRectangle(864 - 16, 256 - 16, 32, 32, STATIC);
-    ptf3->ctype = ColliderType::WALL;
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    int gid = mapLayerItem->data->Get(x, y);
+                    
+                    if (gid == 1) {
+                        iPoint pos = MapToWorld(x, y);
 
-    PhysBody* ptf4_ptf = app->physics->CreateRectangle(832, 480 - 24, 254, 16, STATIC);
-    ptf4_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* ptf4 = app->physics->CreateRectangle(832, 480 - 16, 256, 32, STATIC);
-    ptf4->ctype = ColliderType::WALL;
+                        app->physics->CreateRectangle(pos.x, pos.y, mapData.tileWidth, mapData.tileHeight, STATIC);
+                    }
+                    
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
 
-    
-
-
-    //Islands
-
-    PhysBody* isl1_ptf = app->physics->CreateRectangle(384 + 16, 384 + 8, 94, 16, STATIC);
-    isl1_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* isl1_1 = app->physics->CreateRectangle(384 + 16, 384 + 16, 96, 32, STATIC);
-    isl1_1->ctype = ColliderType::WALL;
-    PhysBody* isl1_2 = app->physics->CreateRectangle(384 + 16, 384 + 32, 32, 64, STATIC);
-    isl1_2->ctype = ColliderType::WALL;
-    PhysBody* circIsl1_1 = app->physics->CreateCircle(384, 416, 32, bodyType::STATIC);
-    circIsl1_1->ctype = ColliderType::WALL;
-    PhysBody* circIsl1_2 = app->physics->CreateCircle(416, 416, 32, bodyType::STATIC);
-    circIsl1_2->ctype = ColliderType::WALL;
-
-    PhysBody* isl2_ptf = app->physics->CreateRectangle(640 - 16, 360 - 32, 96, 16, STATIC);
-    isl2_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* isl2_1 = app->physics->CreateRectangle(640 - 16, 368 - 32, 96, 32, STATIC);
-    isl2_1->ctype = ColliderType::WALL;
-    PhysBody* isl2_2 = app->physics->CreateRectangle(640 - 16, 384 - 32, 32, 64, STATIC);
-    isl2_2->ctype = ColliderType::WALL;
-    PhysBody* circIsl2_1 = app->physics->CreateCircle(608, 384 - 32, 32, bodyType::STATIC);
-    circIsl2_1->ctype = ColliderType::WALL;
-    PhysBody* circIsl2_2 = app->physics->CreateCircle(608 + 33, 384 - 32, 32, bodyType::STATIC);
-    circIsl2_2->ctype = ColliderType::WALL;
-
-
-    //Towers
-
-    PhysBody* twr1_ptf = app->physics->CreateRectangle(128 - 16, 448 - 24, 94, 16, STATIC);
-    twr1_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* twr1 = app->physics->CreateRectangle(128 - 16, 448 - 16, 96, 32, STATIC);
-    twr1->ctype = ColliderType::WALL;
-
-
-    //Walls
-
-    PhysBody* w1 = app->physics->CreateRectangle(32, 384, 64, 2000, STATIC);
-    w1->ctype = ColliderType::WALL;
-    PhysBody* w2 = app->physics->CreateRectangle(2016, 384, 64, 2000, STATIC);
-    w2->ctype = ColliderType::WALL;
-
-
-    //Floor
-
-    PhysBody* flr1_ptf = app->physics->CreateRectangle(256 + 16, 704 + 8, 542, 16, STATIC);
-    flr1_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* flr1 = app->physics->CreateRectangle(256 + 16, 704 + 32, 544, 64, STATIC);
-    flr1->ctype = ColliderType::WALL;
-    
-    PhysBody* flr2_ptf = app->physics->CreateRectangle(864, 704 + 8, 446, 16, STATIC);
-    flr2_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* flr2 = app->physics->CreateRectangle(864, 704 + 32, 448, 64, STATIC);
-    flr2->ctype = ColliderType::WALL;
-
-    PhysBody* flr3_ptf = app->physics->CreateRectangle(1632, 704 + 8, 830, 16, STATIC);
-    flr3_ptf->ctype = ColliderType::PLATFORM;
-    PhysBody* flr3 = app->physics->CreateRectangle(1632, 704 + 32, 832, 64, STATIC);
-    flr3->ctype = ColliderType::WALL;
-
-    PhysBody* roof = app->physics->CreateRectangle(1024, -500, 2048, 64, STATIC);
-    roof->ctype = ColliderType::WALL;
+    }
     
     if(ret == true)
     {
