@@ -69,9 +69,9 @@ public:
 	bool CleanUp();
 
 	// Create basic physics objects
-	PhysBody* CreateRectangle(int x, int y, int width, int height, bodyType type, ColliderType ctype);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, bodyType type);
 	PhysBody* CreateCircle(int x, int y, int radious, bodyType type);
-	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, bodyType type, ColliderType ctype);
+	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, bodyType type);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bodyType type);
 	
 	// b2ContactListener ---
