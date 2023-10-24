@@ -327,15 +327,15 @@ void Physics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-
-	if (physA->ctype == ColliderType::PLAYER && physB->ctype == ColliderType::PLATFORM) {
+	/*
+	if (physA->ctype == ColliderType::PLAYER && physB->ctype == ColliderType::WALL) {
 		// Desactivates the player collider
 		contact->GetFixtureA()->SetSensor(true);
 	}
-	else if (physA->ctype == ColliderType::PLATFORM && physB->ctype == ColliderType::PLAYER) {
+	else if (physA->ctype == ColliderType::WALL && physB->ctype == ColliderType::PLAYER) {
 		// Desactivates the player collider
 		contact->GetFixtureB()->SetSensor(true);
-	}
+	}*/
 
 	if (physA && physA->listener != NULL)
 		physA->listener->OnCollision(physA, physB);
@@ -344,6 +344,7 @@ void Physics::BeginContact(b2Contact* contact)
 		physB->listener->OnCollision(physB, physA);
 }
 
+/*
 void Physics::EndContact(b2Contact* contact)
 {
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
@@ -351,7 +352,7 @@ void Physics::EndContact(b2Contact* contact)
 
 	if (physA->ctype == ColliderType::PLAYER) contact->GetFixtureA()->SetSensor(false);
 	else if (physB->ctype == ColliderType::PLAYER) contact->GetFixtureB()->SetSensor(false);
-}
+}*/
 
 
 //--------------- PhysBody
