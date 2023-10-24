@@ -198,14 +198,16 @@ bool Map::Load()
                         iPoint pos = MapToWorld(x, y);
 
                         PhysBody* p = app->physics->CreateRectangle(pos.x + mapData.tileWidth/2, pos.y + mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                        p->ctype = ColliderType::PLATFORM;
+                        p->ctype = ColliderType::WALL;
                     }
 
                     else if (gid == 2) {
                         iPoint pos = MapToWorld(x, y);
 
-                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                        w->ctype = ColliderType::WALL;
+                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 4, mapData.tileWidth, mapData.tileHeight/2, STATIC);
+                        w->ctype = ColliderType::PLATFORM;
+                        PhysBody* p2 = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight * 0.75, mapData.tileWidth, mapData.tileHeight/2, STATIC);
+                        p2->ctype = ColliderType::WALL;
                     }
                     
                 }
