@@ -27,6 +27,8 @@ public:
 
 	int jumpCounter = 0;
 
+	bool playerDead = false;
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:

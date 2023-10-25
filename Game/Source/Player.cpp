@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Window.h"
 
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -120,6 +121,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::DAMAGE:
+		playerDead = true;
+		LOG("Collision DAMAGE");
 		break;
 	}
 }
