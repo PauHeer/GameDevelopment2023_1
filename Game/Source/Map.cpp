@@ -172,13 +172,18 @@ bool Map::Load()
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
+
+    if (ret == true)
+    {
+        ret = LoadAllGroups(mapFileXML.child("map"));
+    }
     
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
 
 
     //COLLIDERS CREATIONS
-
+    
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
     
@@ -217,25 +222,21 @@ bool Map::Load()
         mapLayerItem = mapLayerItem->next;
 
     }
+
     /*
-    while (mapLayerItem != NULL) {
+    ListItem<ObjectLayer*>* objectLayerItem;
+    objectLayerItem = mapData.objectlayers.start;
 
-        if (mapLayerItem->data->properties.GetProperty("Object Layer 1") != NULL && mapLayerItem->data->properties.GetProperty("Object Layer 1")->value) {
+    while (objectLayerItem != NULL) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+        if (objectLayerItem->data->properties.GetProperty("Object Layer 1") != NULL && objectLayerItem->data->properties.GetProperty("Object Layer 1")->value){
+
+            for (int x = 0; x < objectLayerItem->data->id; x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
-                {
-                    int gid = mapLayerItem->data->Get(x, y);
-                    iPoint pos = MapToWorld(x, y);
-
-                    PhysBody* obj = app->physics->CreateRectangle(pos.x, pos.y, mapData.tileWidth, mapData.tileHeight, STATIC);
-                    obj->ctype = ColliderType::PLATFORM;
-                }
+                
             }
         }
-        mapLayerItem = mapLayerItem->next;
-
+        objectLayerItem = objectLayerItem->next;
     }*/
     
     if(ret == true)
@@ -290,6 +291,8 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
+        mapData.x = map.attribute("x").as_int();
+        mapData.y = map.attribute("y").as_int();
         mapData.type = MAPTYPE_UNKNOWN;
     }
 
@@ -332,6 +335,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     layer->name = node.attribute("name").as_string();
     layer->width = node.attribute("width").as_int();
     layer->height = node.attribute("height").as_int();
+    
 
     LoadProperties(node, layer->properties);
 
@@ -351,6 +355,37 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     return ret;
 }
 
+bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
+{
+    bool ret = true;
+
+    //Load the attributes
+    object->id = node.attribute("id").as_int();
+    object->name = node.attribute("name").as_string();
+    object->width = node.attribute("width").as_int();
+    object->height = node.attribute("height").as_int();
+    object->x = node.attribute("x").as_int();
+    object->y = node.attribute("y").as_int();
+
+
+    LoadProperties(node, object->properties);
+
+    //Reserve the memory for the data 
+    object->data = new uint[object->width * object->height];
+    memset(object->data, 0, object->width * object->height);
+
+    //Iterate over all the tiles and assign the values
+    pugi::xml_node Object;
+    int i = 0;
+    for (Object = node.child("data").child("object"); Object && ret; Object = Object.next_sibling("object"))
+    {
+        object->data[i] = Object.attribute("id").as_int();
+        i++;
+    }
+
+    return ret;
+}
+
 bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     bool ret = true;
 
@@ -362,6 +397,22 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
         //add the layer to the map
         mapData.maplayers.Add(mapLayer);
+    }
+
+    return ret;
+}
+
+bool Map::LoadAllGroups(pugi::xml_node mapNode) {
+    bool ret = true;
+
+    for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup"))
+    {
+        //Load the layer
+        ObjectLayer* objectLayer = new ObjectLayer();
+        ret = LoadGroup(objectNode, objectLayer);
+
+        //add the layer to the map
+        mapData.objectlayers.Add(objectLayer);
     }
 
     return ret;
