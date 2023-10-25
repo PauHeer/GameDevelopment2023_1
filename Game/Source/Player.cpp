@@ -90,6 +90,7 @@ bool Player::Update(float dt)
 	//Update camera position
 	int center = app->win->screenSurface->w/2;
 	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = center - position.x;
+	if ((center - position.y < 0) && (center - position.y > 1030)) app->render->camera.y = center - position.y;
 
 
 	app->render->DrawTexture(texture, position.x, position.y);

@@ -42,6 +42,7 @@ bool Map::Update(float dt)
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+            int id = mapLayerItem->data->id;
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
@@ -53,10 +54,7 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                    app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);
+                    app->render->DrawTexture(tileset->texture, pos.x, pos.y, &r);
                 }
             }
         }
@@ -183,7 +181,7 @@ bool Map::Load()
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
-
+    
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->properties.GetProperty("Collisions") != NULL && mapLayerItem->data->properties.GetProperty("Collisions")->value) {
@@ -193,28 +191,23 @@ bool Map::Load()
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
                     int gid = mapLayerItem->data->Get(x, y);
-                    
-                    if (gid == 1) {
-                        iPoint pos = MapToWorld(x, y);
+                    iPoint pos = MapToWorld(x, y);
 
-                        PhysBody* p = app->physics->CreateRectangle(pos.x + mapData.tileWidth/2, pos.y + mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                        p->ctype = ColliderType::WALL;
+                    if (gid == 1) {
+                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth/2, pos.y + mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
+                        w->ctype = ColliderType::WALL;
                     }
 
                     else if (gid == 2) {
-                        iPoint pos = MapToWorld(x, y);
-
-                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 4, mapData.tileWidth, mapData.tileHeight/2, STATIC);
-                        w->ctype = ColliderType::PLATFORM;
-                        PhysBody* p2 = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight * 0.75, mapData.tileWidth, mapData.tileHeight/2, STATIC);
-                        p2->ctype = ColliderType::WALL;
+                        PhysBody* p = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 4, mapData.tileWidth, mapData.tileHeight/2, STATIC);
+                        p->ctype = ColliderType::PLATFORM;
+                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight * 0.75, mapData.tileWidth, mapData.tileHeight/2, STATIC);
+                        w->ctype = ColliderType::WALL;
                     }
 
                     else if (gid == 3) {
-                        iPoint pos = MapToWorld(x, y);
-
-                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                        w->ctype = ColliderType::DAMAGE;
+                        PhysBody* d = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
+                        d->ctype = ColliderType::DAMAGE;
                        
                     }
                     
@@ -224,6 +217,26 @@ bool Map::Load()
         mapLayerItem = mapLayerItem->next;
 
     }
+    /*
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->properties.GetProperty("Object Layer 1") != NULL && mapLayerItem->data->properties.GetProperty("Object Layer 1")->value) {
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    int gid = mapLayerItem->data->Get(x, y);
+                    iPoint pos = MapToWorld(x, y);
+
+                    PhysBody* obj = app->physics->CreateRectangle(pos.x, pos.y, mapData.tileWidth, mapData.tileHeight, STATIC);
+                    obj->ctype = ColliderType::PLATFORM;
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
+
+    }*/
     
     if(ret == true)
     {
