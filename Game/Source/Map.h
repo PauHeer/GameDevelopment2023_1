@@ -85,8 +85,36 @@ struct MapLayer
 	}
 };
 
+struct ObjectLayer
+{
+	SString	name;
+	int id;
+	int x;
+	int y;
+	int width;
+	int height;
+	uint* data;
+
+	Properties properties;
+
+	ObjectLayer() : data(NULL)
+	{}
+
+	~ObjectLayer()
+	{
+		RELEASE(data);
+	}
+
+	inline uint Get(int x, int y) const
+	{
+		return data[(y * width) + x];
+	}
+};
+
 struct MapData
 {
+	int x;
+	int y;
 	int width;
 	int	height;
 	int	tileWidth;
@@ -95,6 +123,7 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
+	List<ObjectLayer*> objectlayers;
 };
 
 class Map : public Module
@@ -126,7 +155,9 @@ private:
 	bool LoadMap(pugi::xml_node mapFile);
 	bool LoadTileSet(pugi::xml_node mapFile);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadGroup(pugi::xml_node& node, ObjectLayer* object);
 	bool LoadAllLayers(pugi::xml_node mapNode);
+	bool LoadAllGroups(pugi::xml_node mapNode);
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
