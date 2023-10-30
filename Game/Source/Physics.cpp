@@ -328,11 +328,11 @@ void Physics::BeginContact(b2Contact* contact)
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
 	/*
-	if (physA->ctype == ColliderType::PLAYER && physB->ctype == ColliderType::WALL) {
+	if (physA->ctype == ColliderType::PLAYER && physB->ctype == ColliderType::PLATFORM) {
 		// Desactivates the player collider
 		contact->GetFixtureA()->SetSensor(true);
 	}
-	else if (physA->ctype == ColliderType::WALL && physB->ctype == ColliderType::PLAYER) {
+	else if (physA->ctype == ColliderType::PLATFORM && physB->ctype == ColliderType::PLAYER) {
 		// Desactivates the player collider
 		contact->GetFixtureB()->SetSensor(true);
 	}*/

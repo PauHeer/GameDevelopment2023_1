@@ -183,7 +183,7 @@ bool Map::Load()
 
 
     //COLLIDERS CREATIONS
-    
+    /*
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
     
@@ -221,23 +221,8 @@ bool Map::Load()
         }
         mapLayerItem = mapLayerItem->next;
 
-    }
-
-    /*
-    ListItem<ObjectLayer*>* objectLayerItem;
-    objectLayerItem = mapData.objectlayers.start;
-
-    while (objectLayerItem != NULL) {
-
-        if (objectLayerItem->data->properties.GetProperty("Object Layer 1") != NULL && objectLayerItem->data->properties.GetProperty("Object Layer 1")->value){
-
-            for (int x = 0; x < objectLayerItem->data->id; x++)
-            {
-                
-            }
-        }
-        objectLayerItem = objectLayerItem->next;
     }*/
+
     
     if(ret == true)
     {
@@ -359,28 +344,21 @@ bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
 {
     bool ret = true;
 
-    //Load the attributes
-    object->id = node.attribute("id").as_int();
-    object->name = node.attribute("name").as_string();
-    object->width = node.attribute("width").as_int();
-    object->height = node.attribute("height").as_int();
-    object->x = node.attribute("x").as_int();
-    object->y = node.attribute("y").as_int();
-
-
-    LoadProperties(node, object->properties);
-
-    //Reserve the memory for the data 
-    object->data = new uint[object->width * object->height];
-    memset(object->data, 0, object->width * object->height);
-
     //Iterate over all the tiles and assign the values
     pugi::xml_node Object;
     int i = 0;
-    for (Object = node.child("data").child("object"); Object && ret; Object = Object.next_sibling("object"))
+    for (Object = node.child("object"); Object && ret; Object = Object.next_sibling("object"))
     {
-        object->data[i] = Object.attribute("id").as_int();
-        i++;
+        //Load the attributes
+        int id = Object.attribute("id").as_int();
+        int width = Object.attribute("width").as_int();
+        int height = Object.attribute("height").as_int();
+        int x = Object.attribute("x").as_int();
+        int y = Object.attribute("y").as_int();
+
+        //Create collider
+        PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
+        p->ctype = ColliderType::PLATFORM;
     }
 
     return ret;

@@ -104,11 +104,6 @@ struct ObjectLayer
 	{
 		RELEASE(data);
 	}
-
-	inline uint Get(int x, int y) const
-	{
-		return data[(y * width) + x];
-	}
 };
 
 struct MapData

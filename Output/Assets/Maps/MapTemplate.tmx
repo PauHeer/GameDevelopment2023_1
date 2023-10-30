@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="35">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="37">
  <tileset firstgid="1" name="Collisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="3" columns="3">
   <image source="MapMetadata.png" width="100" height="34"/>
  </tileset>
@@ -119930,9 +119930,9 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="13" name="Object Layer 1">
+ <objectgroup id="13" name="Platform">
   <properties>
-   <property name="Object Layer 1" type="bool" value="true"/>
+   <property name="Object Layer" type="bool" value="true"/>
   </properties>
   <object id="8" x="0.25" y="704.25" width="543.75" height="31.75"/>
   <object id="9" x="224.25" y="544.75" width="255" height="30.75"/>
