@@ -88,9 +88,18 @@ bool Player::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
 
 	//Update camera position
+	//Lerp-smoothing camera
 	int center = app->win->screenSurface->w/2;
-	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = center - position.x;
-	if ((center - position.y < 0) && (center - position.y > -1030)) app->render->camera.y = center - position.y;
+	float t = 0.1f; // 0 -> +smooth, 1 -> -smooth
+
+	int targetX = center - position.x;
+	int targetY = center - position.y;
+
+	float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
+	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
+
+	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = xLerp;
+	if ((center - position.y < 0) && (center - position.y > -1030)) app->render->camera.y = yLerp;
 
 
 	app->render->DrawTexture(texture, position.x, position.y);
