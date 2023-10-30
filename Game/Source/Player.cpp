@@ -36,7 +36,6 @@ bool Player::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x -288, position.y + 320, 32, 60, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
-	//sensor = app->physics->CreateRectangleSensor(position.x - 288, position.y + 320, 32, 60, bodyType::KINEMATIC, ColliderType::PLAYER);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 

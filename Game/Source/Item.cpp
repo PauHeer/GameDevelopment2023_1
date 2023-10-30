@@ -29,7 +29,7 @@ bool Item::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 8, bodyType::STATIC);
+	pbody = app->physics->CreateCircleSensor(position.x + 16, position.y + 16, 8, bodyType::STATIC);
 	pbody->ctype = ColliderType::ITEM;
 	pbody->listener = this;
 
