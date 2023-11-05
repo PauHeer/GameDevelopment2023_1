@@ -16,8 +16,11 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 	
-	idleAnim.PushBack({ 0, 0, 31, 59 });
-	idleAnim.PushBack({ 10, 10, 31, 59 });
+	idleAnim.PushBack({ 39, 20, 32, 60 });
+	idleAnim.PushBack({ 159, 20, 32, 60 });
+	idleAnim.PushBack({ 279, 20, 32, 60 });
+	idleAnim.PushBack({ 399, 20, 32, 60 });
+	idleAnim.PushBack({ 519, 20, 32, 60 });
 	idleAnim.loop = true;
 	idleAnim.speed = 0.2f;
 }
@@ -76,10 +79,20 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel.x = (-speed * dt);
+
+			if (currentAnimation != &leftAnim) {
+				leftAnim.Reset();
+				currentAnimation = &leftAnim;
+			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel.x = (speed * dt);
+
+			if (currentAnimation != &rightAnim) {
+				rightAnim.Reset();
+				currentAnimation = &rightAnim;
+			}
 		}
 
 		if (Jumping != true)
@@ -90,6 +103,11 @@ bool Player::Update(float dt)
 				if (jumpCounter > 1)
 				{
 					Jumping = true;
+				}
+
+				if (currentAnimation != &upAnim) {
+					upAnim.Reset();
+					currentAnimation = &upAnim;
 				}
 			}
 		}
