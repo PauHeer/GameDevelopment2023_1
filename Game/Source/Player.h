@@ -53,6 +53,7 @@ public:
 	Animation downAnim;
 	Animation leftAnim;
 	Animation rightAnim;
+	Animation dieAnim;
 };
 
 #endif // __PLAYER_H__

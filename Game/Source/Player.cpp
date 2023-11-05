@@ -16,13 +16,46 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 	
-	idleAnim.PushBack({ 39, 20, 32, 60 });
-	idleAnim.PushBack({ 159, 20, 32, 60 });
-	idleAnim.PushBack({ 279, 20, 32, 60 });
-	idleAnim.PushBack({ 399, 20, 32, 60 });
-	idleAnim.PushBack({ 519, 20, 32, 60 });
+	idleAnim.PushBack({ 0, 0, 32, 60 });
+	idleAnim.PushBack({ 194, 0, 32, 60 });
+	idleAnim.PushBack({ 389, 0, 32, 60 });
+	idleAnim.PushBack({ 584, 0, 32, 60 });
+	idleAnim.PushBack({ 778, 0, 32, 60 });
 	idleAnim.loop = true;
 	idleAnim.speed = 0.2f;
+
+	rightAnim.PushBack({ 0, 61, 43, 56 });
+	rightAnim.PushBack({ 187, 62, 43, 56 });
+	rightAnim.PushBack({ 375, 62, 43, 56 });
+	rightAnim.PushBack({ 560, 61, 43, 56 });
+	rightAnim.PushBack({ 748, 60, 43, 56 });
+	rightAnim.PushBack({ 933, 60, 43, 56 });
+	rightAnim.loop = true;
+	rightAnim.speed = 0.3f;
+
+	leftAnim.PushBack({ 962, 246, 43, 56 });
+	leftAnim.PushBack({ 772, 247, 43, 56 });
+	leftAnim.PushBack({ 581, 247, 43, 56 });
+	leftAnim.PushBack({ 393, 246, 43, 56 });
+	leftAnim.PushBack({ 204, 244, 43, 56 });
+	leftAnim.PushBack({ 16, 246, 43, 56 });
+	leftAnim.loop = true;
+	leftAnim.speed = 0.3f;
+
+	upAnim.PushBack({ 0, 178, 37, 60 });
+	upAnim.PushBack({ 194, 178, 37, 60 });
+	upAnim.PushBack({ 389, 178, 37, 60 });
+	upAnim.loop = true;
+	upAnim.speed = 0.3f;
+
+	dieAnim.PushBack({ 0, 121, 39, 54 });
+	dieAnim.PushBack({ 173, 120, 39, 54 });
+	dieAnim.PushBack({ 347, 132, 44, 33 });
+	dieAnim.PushBack({ 516, 132, 49, 33 });
+	dieAnim.PushBack({ 684, 142, 52, 30 });
+	dieAnim.PushBack({ 857, 146, 52, 30 });
+	dieAnim.loop = false;
+	dieAnim.speed = 0.3f;
 }
 
 Player::~Player() {
@@ -136,7 +169,13 @@ bool Player::Update(float dt)
 			vel.x = (speed * dt);
 		}
 	}
-	
+
+	if ((vel.x == 0) && (vel.y == 0)) {
+		if (currentAnimation != &idleAnim) {
+			idleAnim.Reset();
+			currentAnimation = &idleAnim;
+		}
+	}
 
 	//Set the velocity of the pbody of the player
 	//if (Jumping != true)
@@ -211,7 +250,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision UNKNOWN");
 		break;
 	case ColliderType::DAMAGE:
-		if(godMode == false) playerDead = true;
+		if (godMode == false) {
+			currentAnimation = &dieAnim;
+			currentAnimation->Update();
+			playerDead = true;
+		}
 		LOG("Collision DAMAGE");
 		break;
 	}
