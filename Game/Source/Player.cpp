@@ -25,8 +25,8 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	start.x = position.x;
-	start.y = position.y;
+	start.x = parameters.attribute("x").as_int();
+	start.y = parameters.attribute("y").as_int();
 
 	return true;
 }
@@ -52,7 +52,7 @@ bool Player::Update(float dt)
 {
 	b2Vec2 vel = pbody->body->GetLinearVelocity();
 	vel.x = 0;
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
 		godMode = !godMode;
 	}
@@ -118,15 +118,25 @@ bool Player::Update(float dt)
 		pbody->body->SetLinearVelocity(vel);
 	//}
 	
-	//Update player position in pixels
+	//Moves the player to the start
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-
 		position.x = start.x;
 		position.y = start.y;
+
+		app->physics->DestroyBody(pbody);
+		pbody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
+		pbody->body->SetFixedRotation(true);
+		pbody->listener = this;
+		pbody->ctype = ColliderType::PLAYER;
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 	}
+	//Update player position in pixels
 	else {
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
+
+		app->render->DrawTexture(texture, position.x, position.y);
 	}
 
 	//Update camera position
@@ -141,10 +151,7 @@ bool Player::Update(float dt)
 	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
 
 	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = xLerp;
-	if ((center - position.y < 0) && (center - position.y > -1030)) app->render->camera.y = yLerp;
-
-
-	app->render->DrawTexture(texture, position.x, position.y);
+	if ((center - position.y < 0) && (center - position.y > -2400)) app->render->camera.y = yLerp;
 
 	return true;
 }
