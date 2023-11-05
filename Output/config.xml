@@ -1,11 +1,12 @@
 <config>
   <app>
     <title>Game Development Testbed</title>
+    <maxFrameDuration value ="16"/>
     <organization>CITM</organization>
   </app>
 
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
   </renderer>
 
   <window>

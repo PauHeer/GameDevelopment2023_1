@@ -82,8 +82,9 @@ bool App::Awake()
 
 	if(ret == true)
 	{
-		title = configNode.child("app").child("title").child_value(); 
+		title.Create(configFile.child("config").child("app").child("title").child_value());
 		win->SetTitle(title.GetString());
+		maxFrameDuration = configFile.child("config").child("app").child("maxFrameDuration").attribute("value").as_int();
 
 		ListItem<Module*>* item;
 		item = modules.start;
@@ -93,8 +94,8 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-			pugi::xml_node node = configNode.child(item->data->name.GetString());
-			ret = item->data->Awake(node);
+			
+			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}
