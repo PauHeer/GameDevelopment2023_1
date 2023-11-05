@@ -25,6 +25,8 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	start.x = position.x;
+	start.y = position.y;
 
 	return true;
 }
@@ -34,12 +36,14 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x -288, position.y + 320, 32, 60, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/coinSound.ogg");
+
+	gravityScale = pbody->body->GetGravityScale();
 
 	return true;
 }
@@ -49,32 +53,64 @@ bool Player::Update(float dt)
 	b2Vec2 vel = pbody->body->GetLinearVelocity();
 	vel.x = 0;
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		//
-	}
-	
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			vel.y = 10.0f;
-	}
-	
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel.x = (-speed*dt);
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		godMode = !godMode;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		vel.x = (speed*dt);
-	}
-	if (Jumping != true)
+	if (godMode == false)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			vel.y = -9.0f;
-			jumpCounter++;
-			if (jumpCounter > 1)
-			{
-				Jumping = true;
+		pbody->body->SetGravityScale(gravityScale);
+		pbody->body->GetFixtureList()->SetSensor(false);
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			vel.y = 10.0f;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			vel.x = (-speed * dt);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			vel.x = (speed * dt);
+		}
+
+		if (Jumping != true)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+				vel.y = -9.0f;
+				jumpCounter++;
+				if (jumpCounter > 1)
+				{
+					Jumping = true;
+				}
 			}
 		}
 	}
+	
+	else if (godMode == true)
+	{
+		pbody->body->SetGravityScale(0);
+		pbody->body->GetFixtureList()->SetSensor(true);
+		vel.x = 0;
+		vel.y = 0;
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			vel.y = (-speed * dt);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			vel.y = (speed * dt);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			vel.x = (-speed * dt);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			vel.x = (speed * dt);
+		}
+	}
+	
 
 	//Set the velocity of the pbody of the player
 	//if (Jumping != true)
@@ -83,8 +119,15 @@ bool Player::Update(float dt)
 	//}
 	
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+
+		position.x = start.x;
+		position.y = start.y;
+	}
+	else {
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
+	}
 
 	//Update camera position
 	//Lerp-smoothing camera
@@ -132,7 +175,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision UNKNOWN");
 		break;
 	case ColliderType::DAMAGE:
-		playerDead = true;
+		if(godMode == false) playerDead = true;
 		LOG("Collision DAMAGE");
 		break;
 	}

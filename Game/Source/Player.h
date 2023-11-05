@@ -29,6 +29,8 @@ public:
 
 	bool playerDead = false;
 
+	bool godMode = false;
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
@@ -38,6 +40,7 @@ public:
 	PhysBody* pbody;
 	PhysBody* sensor;
 	int pickCoinFxId;
+	int gravityScale;
 };
 
 #endif // __PLAYER_H__

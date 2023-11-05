@@ -80,21 +80,21 @@ bool App::Awake()
 
 	bool ret = LoadConfig();
 
-	if(ret == true)
+	if (ret == true)
 	{
-		title.Create(configFile.child("config").child("app").child("title").child_value());
-		win->SetTitle(title.GetString());
+		gameTitle.Create(configFile.child("config").child("app").child("title").child_value());
+		win->SetTitle(gameTitle.GetString());
 		maxFrameDuration = configFile.child("config").child("app").child("maxFrameDuration").attribute("value").as_int();
 
 		ListItem<Module*>* item;
 		item = modules.start;
 
-		while(item != NULL && ret == true)
+		while (item != NULL && ret == true)
 		{
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-			
+
 			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
 			item = item->next;
 		}
@@ -150,15 +150,16 @@ bool App::Update()
 // Load config from XML file
 bool App::LoadConfig()
 {
-	bool ret = false;
-	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-
-	if (parseResult) {
-		ret = true;
-		configNode = configFile.child("config");
+	bool ret = true;
+	
+	pugi::xml_parse_result result = configFile.load_file("config.xml");
+	if (result)
+	{
+		LOG("config.xml parsed without errors");
 	}
-	else {
-		LOG("Error in App::LoadConfig(): %s", parseResult.description());
+	else
+	{
+		LOG("Error loading config.xml: %s", result.description());
 	}
 
 	return ret;
@@ -315,7 +316,7 @@ const char* App::GetArgv(int index) const
 // ---------------------------------------
 const char* App::GetTitle() const
 {
-	return title.GetString();
+	return gameTitle.GetString();
 }
 
 // ---------------------------------------
