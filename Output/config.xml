@@ -34,8 +34,13 @@
 	<item x="992" y="544" texturepath="Assets/Textures/goldCoin.png"/>
 	<item x="64" y="1216" texturepath="Assets/Textures/goldCoin.png"/>
 	<item x="256" y="2912" texturepath="Assets/Textures/goldCoin.png"/>
-	  <item x="79*32" y="18*32" texturepath="Assets/Textures/goldCoin.png"/>
-	  
+	  <item x="2528" y="576" texturepath="Assets/Textures/goldCoin.png"/>
+	  <item x="576" y="1056" texturepath="Assets/Textures/goldCoin.png"/>
+	  <item x="224" y="2272" texturepath="Assets/Textures/goldCoin.png"/>
+
+
+
+
   </scene>
 
   <map>
