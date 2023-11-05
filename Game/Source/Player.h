@@ -1,6 +1,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+#include "Animation.h"
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
@@ -37,10 +38,21 @@ public:
 	float speed = 0.35f;
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
+
 	PhysBody* pbody;
 	PhysBody* sensor;
+
 	int pickCoinFxId;
+
 	int gravityScale;
+
+	Animation* currentAnimation = NULL;
+
+	Animation idleAnim;
+	Animation upAnim;
+	Animation downAnim;
+	Animation leftAnim;
+	Animation rightAnim;
 };
 
 #endif // __PLAYER_H__

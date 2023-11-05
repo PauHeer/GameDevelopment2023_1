@@ -9,11 +9,17 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "Animation.h"
 
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+	
+	idleAnim.PushBack({ 0, 0, 31, 59 });
+	idleAnim.PushBack({ 10, 10, 31, 59 });
+	idleAnim.loop = true;
+	idleAnim.speed = 0.2f;
 }
 
 Player::~Player() {
@@ -44,6 +50,8 @@ bool Player::Start() {
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/coinSound.ogg");
 
 	gravityScale = pbody->body->GetGravityScale();
+
+	currentAnimation = &idleAnim;
 
 	return true;
 }
@@ -118,6 +126,8 @@ bool Player::Update(float dt)
 		pbody->body->SetLinearVelocity(vel);
 	//}
 	
+	currentAnimation->Update();
+
 	//Moves the player to the start
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		position.x = start.x;
@@ -136,7 +146,8 @@ bool Player::Update(float dt)
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
 
-		app->render->DrawTexture(texture, position.x, position.y);
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
 	}
 
 	//Update camera position
