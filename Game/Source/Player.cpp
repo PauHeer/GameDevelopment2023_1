@@ -218,7 +218,7 @@ bool Player::Update(float dt)
 	float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
 	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
 
-	if ((center - position.x < 0) && (center - position.x > -1030)) app->render->camera.x = xLerp;
+	if ((center - position.x < 0) && (center - position.x > -2030)) app->render->camera.x = xLerp;
 	if ((center - position.y < 0) && (center - position.y > -2400)) app->render->camera.y = yLerp;
 
 	return true;
