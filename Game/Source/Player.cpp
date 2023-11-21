@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 		if (Jumping != true)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-				vel.y = -9.0f;
+				vel.y = -12.0f;
 				jumpCounter++;
 				if (jumpCounter > 1)
 				{
