@@ -203,12 +203,12 @@ bool Map::Load()
                         w->ctype = ColliderType::WALL;
                     }
                     
-                    else if (gid == 2) {
+                   /* else if (gid == 2) {
                         PhysBody* p = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 4, mapData.tileWidth, mapData.tileHeight/2, STATIC);
                         p->ctype = ColliderType::PLATFORM;
                         PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight * 0.75, mapData.tileWidth, mapData.tileHeight/2, STATIC);
                         w->ctype = ColliderType::WALL;
-                    }
+                    }*/
 
                     else if (gid == 3) {
                         PhysBody* d = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
@@ -357,8 +357,10 @@ bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
         int y = Object.attribute("y").as_int();
 
         //Create collider
-        PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
+        PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 4), width, height / 2, STATIC);
         p->ctype = ColliderType::PLATFORM;
+        PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height * 0.75), width, height / 2, STATIC);
+        w->ctype = ColliderType::WALL;
     }
 
     return ret;
