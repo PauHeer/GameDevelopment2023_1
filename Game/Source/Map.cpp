@@ -357,14 +357,14 @@ bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
         int y = Object.attribute("y").as_int();
 
         //Create collider
-        if (id == 13)
+        if (node.attribute("id").as_int() == 13)
         {
             PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 4), width, height / 2, STATIC);
             p->ctype = ColliderType::PLATFORM;
             PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height * 0.75), width, height / 2, STATIC);
             w->ctype = ColliderType::WALL;
         }
-        else if (id == 24)
+        if (node.attribute("id").as_int() == 24)
         {
             PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
             w->ctype = ColliderType::WALL;
