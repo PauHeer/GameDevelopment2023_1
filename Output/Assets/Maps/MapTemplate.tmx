@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="274">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="28" nextobjectid="275">
  <tileset firstgid="1" name="Collisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="3" columns="3">
   <image source="MapMetadata.png" width="100" height="34"/>
  </tileset>
@@ -58727,7 +58727,7 @@
    <tile gid="13"/>
    <tile gid="13"/>
    <tile gid="13"/>
-   <tile gid="3388"/>
+   <tile gid="3465"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
@@ -58823,7 +58823,7 @@
    <tile gid="13"/>
    <tile gid="13"/>
    <tile gid="13"/>
-   <tile gid="3388"/>
+   <tile gid="3465"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
@@ -77173,7 +77173,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3552"/>
+   <tile gid="3551"/>
    <tile/>
    <tile/>
    <tile/>
@@ -77269,7 +77269,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3571"/>
+   <tile gid="3570"/>
    <tile/>
    <tile/>
    <tile/>
@@ -86396,7 +86396,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="3357"/>
    <tile/>
    <tile/>
    <tile/>
@@ -95619,6 +95619,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="3357"/>
    <tile/>
    <tile/>
    <tile/>
@@ -95714,8 +95715,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="3357"/>
    <tile/>
    <tile/>
    <tile/>
@@ -110767,7 +110767,7 @@
   <object id="117" x="416.125" y="2527.75" width="52.375" height="32.375"/>
   <object id="119" x="831.333" y="2304.33" width="53.3333" height="31.3333"/>
   <object id="213" x="2336.67" y="512" width="32" height="32"/>
-  <object id="215" x="1791.5" y="1600" width="39" height="31.5"/>
+  <object id="215" x="1792.59" y="1600" width="37.9091" height="31.5"/>
   <object id="222" x="500" y="1727.33" width="10" height="50.6667"/>
   <object id="223" x="2784" y="928" width="290" height="30.5"/>
   <object id="263" x="2816.5" y="1152.25" width="63.75" height="10.75"/>
@@ -110955,5 +110955,8 @@
   <object id="116" x="1152.13" y="480">
    <polygon points="0,0 15.875,-27.875 32,0.125"/>
   </object>
+ </objectgroup>
+ <objectgroup id="27" name="Doors">
+  <object id="274" x="2783.82" y="1087.64" width="6.18182" height="64.1818"/>
  </objectgroup>
 </map>

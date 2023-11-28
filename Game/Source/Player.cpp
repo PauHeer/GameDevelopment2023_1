@@ -56,7 +56,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	dieAnim.PushBack({ 684, 142, 52, 30 });
 	dieAnim.PushBack({ 857, 146, 52, 30 });
 	dieAnim.loop = false;
-	dieAnim.speed = 0.3f;
+	dieAnim.speed = 0.1f;
 }
 
 Player::~Player() {
@@ -257,6 +257,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			playerDead = true;
 		}
 		LOG("Collision DAMAGE");
+		break;
+	case ColliderType::DOOR:
+		if (haveKey == true) {
+			// Destruir el collider de la puerta
+			app->physics->DestroyBody(app->map->door);
+			app->map->door = nullptr;  // Asegurarse de que el puntero sea nulo después de destruir el cuerpo
+		}
+		LOG("Collision DOOR");
 		break;
 	}
 }

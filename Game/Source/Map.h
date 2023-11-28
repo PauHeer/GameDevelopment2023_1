@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
-#include "Pathfinding.h"
+//#include "Pathfinding.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -143,8 +143,14 @@ public:
     // Load new map
     bool Load();
 
+	bool isDoorColliderActive = true;
+
+	
+
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
+	PhysBody* door;
+
 
 private:
 

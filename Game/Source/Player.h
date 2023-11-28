@@ -32,6 +32,8 @@ public:
 
 	bool godMode = false;
 
+	bool haveKey = true;
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:

@@ -198,29 +198,14 @@ bool Map::Load()
                     int gid = mapLayerItem->data->Get(x, y);
                     iPoint pos = MapToWorld(x, y);
 
-                   /* if (gid == 1) {
-                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth/2, pos.y + mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                        w->ctype = ColliderType::WALL;
-                    }*/
-                    
-                   /* else if (gid == 2) {
-                        PhysBody* p = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 4, mapData.tileWidth, mapData.tileHeight/2, STATIC);
-                        p->ctype = ColliderType::PLATFORM;
-                        PhysBody* w = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight * 0.75, mapData.tileWidth, mapData.tileHeight/2, STATIC);
-                        w->ctype = ColliderType::WALL;
-                    }*/
-
                     if (gid == 3) {
                         PhysBody* d = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
                         d->ctype = ColliderType::DAMAGE;
-                       
-                    }
-                    
+                    }                  
                 }
             }
         }
         mapLayerItem = mapLayerItem->next;
-
     }
 
     
@@ -369,6 +354,11 @@ bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
             PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
             w->ctype = ColliderType::WALL;
         }
+        if (node.attribute("id").as_int() == 27)
+        {
+            PhysBody* door = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
+            door->ctype = ColliderType::DOOR;
+        }
         
     }
 
@@ -439,5 +429,6 @@ Properties::Property* Properties::GetProperty(const char* name)
 
     return p;
 }
+
 
 
