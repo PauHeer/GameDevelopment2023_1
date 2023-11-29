@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
-//#include "Pathfinding.h"
+#include "Pathfinding.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -166,6 +166,7 @@ private:
 public: 
 
 	MapData mapData;
+	PathFinding* pathfinding;
 
 private:
 
