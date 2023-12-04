@@ -3,6 +3,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,10 +44,11 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
             int id = mapLayerItem->data->id;
+            iPoint position = WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+            for (int x = (position.x - 10); x < (position.x + 10 ); x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+                for (int y = (position.y - 10); y < (position.y + 10); y++)
                 {
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
@@ -77,9 +79,10 @@ iPoint Map::MapToWorld(int x, int y) const
 
 iPoint Map::WorldToMap(int x, int y) 
 {
-    iPoint ret(0, 0);
+    iPoint ret;
 
-    //
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
 
     return ret;
 }
