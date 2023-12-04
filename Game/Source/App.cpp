@@ -211,6 +211,16 @@ void App::FinishUpdate()
 		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
 
 	app->win->SetTitle(title);
+
+	if (loadRequest) {
+		loadRequest = false;
+		LoadFromFile();
+	}
+
+	if (saveRequest) {
+		saveRequest = false;
+		SaveFromFile();
+	}
 }
 
 // Call modules before each loop iteration
