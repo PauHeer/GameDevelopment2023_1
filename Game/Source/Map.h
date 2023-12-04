@@ -173,6 +173,7 @@ private:
     SString mapFileName;
 	SString mapFolder;
     bool mapLoaded;
+	bool firstRender = false;
 };
 
 #endif // __MAP_H__

@@ -44,12 +44,16 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
             int id = mapLayerItem->data->id;
-            iPoint position = WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+            Player* player = app->scene->GetPlayer();
+            iPoint position = WorldToMap(player->position.x, player->position.y);
+            
 
-            for (int x = (position.x - 10); x < (position.x + 10 ); x++)
+            for (int x = (position.x - 25); x < (position.x + 25); x++)
             {
-                for (int y = (position.y - 10); y < (position.y + 10); y++)
+                if (x < 0) x = 0;
+                for (int y = (position.y - 20); y < (position.y + 20); y++)
                 {
+                    if (y < 0) y = 0;
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
@@ -204,7 +208,7 @@ bool Map::Load()
                     if (gid == 3) {
                         PhysBody* d = app->physics->CreateRectangle(pos.x + mapData.tileWidth / 2, pos.y + mapData.tileHeight / 2, mapData.tileWidth, mapData.tileHeight, STATIC);
                         d->ctype = ColliderType::DAMAGE;
-                    }                  
+                    }
                 }
             }
         }
