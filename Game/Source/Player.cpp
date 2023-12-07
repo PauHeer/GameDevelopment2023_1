@@ -219,8 +219,8 @@ bool Player::Update(float dt)
 	float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
 	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
 
-	if ((center - position.x < 0) && (center - position.x < (app->map->mapData.tileWidth))) app->render->camera.x = xLerp;
-	if ((center - position.y < 0) && (center - position.y < (app->map->mapData.tileHeight))) app->render->camera.y = yLerp;
+	if ((center - position.x < 0) && (center - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
+	if ((center - position.y < 0) && (center - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
 
 	return true;
 }

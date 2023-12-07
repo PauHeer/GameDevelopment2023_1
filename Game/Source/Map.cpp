@@ -46,14 +46,29 @@ bool Map::Update(float dt)
             int id = mapLayerItem->data->id;
             Player* player = app->scene->GetPlayer();
             iPoint position = WorldToMap(player->position.x, player->position.y);
-            
+            int x = (position.x - 18), xMax = (position.x + 18);
 
-            for (int x = (position.x - 25); x < (position.x + 25); x++)
+            for (x; x < xMax; x++)
             {
-                if (x < 0) x = 0;
-                for (int y = (position.y - 20); y < (position.y + 20); y++)
+                if (x < 0) {
+                    int aux = x;
+                    x = 0;
+                    xMax -= aux;
+                }
+                else if (xMax > mapData.width) {
+                    xMax -= 1;
+                }
+
+                for (int y = (position.y - 18); y < (position.y + 12); y++)
                 {
-                    if (y < 0) y = 0;
+                    if (y < 0) {
+                        int aux = y;
+                        y = 0;
+                        position.y -= aux;
+                    }
+                    else if ((position.y +12) > mapData.height) {
+                        position.y -= 1;
+                    }
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
