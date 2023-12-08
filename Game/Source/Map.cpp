@@ -59,14 +59,14 @@ bool Map::Update(float dt)
                     xMax -= 1;
                 }
 
-                for (int y = (position.y - 18); y < (position.y + 12); y++)
+                for (int y = (position.y - 18); y < (position.y + 18); y++)
                 {
                     if (y < 0) {
                         int aux = y;
                         y = 0;
                         position.y -= aux;
                     }
-                    else if ((position.y +12) > mapData.height) {
+                    else if ((position.y +18) > mapData.height) {
                         position.y -= 1;
                     }
                     int gid = mapLayerItem->data->Get(x, y);

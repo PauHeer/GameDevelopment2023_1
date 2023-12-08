@@ -210,17 +210,18 @@ bool Player::Update(float dt)
 
 	//Update camera position
 	//Lerp-smoothing camera
-	int center = app->win->screenSurface->w/2;
+	int centerX = app->win->screenSurface->w / 2;
+	int centerY = app->win->screenSurface->h / 2;
 	float t = 0.1f; // 0 -> +smooth, 1 -> -smooth
 
-	int targetX = center - position.x;
-	int targetY = center - position.y;
+	int targetX = centerX - position.x;
+	int targetY = centerY - position.y;
 
 	float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
 	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
 
-	if ((center - position.x < 0) && (center - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
-	if ((center - position.y < 0) && (center - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
+	if ((centerX - position.x < 0) && (centerX - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
+	if ((centerY - position.y < 0) && (centerY - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
 
 	return true;
 }
