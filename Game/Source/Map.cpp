@@ -46,7 +46,7 @@ bool Map::Update(float dt)
             int id = mapLayerItem->data->id;
             Player* player = app->scene->GetPlayer();
             iPoint position = WorldToMap(player->position.x, player->position.y);
-            int x = (position.x - 18), xMax = (position.x + 18);
+            int x = (position.x - 20), xMax = (position.x + 20);
 
             for (x; x < xMax; x++)
             {
@@ -59,14 +59,14 @@ bool Map::Update(float dt)
                     xMax -= 1;
                 }
 
-                for (int y = (position.y - 18); y < (position.y + 18); y++)
+                for (int y = (position.y - 20); y < (position.y + 20); y++)
                 {
                     if (y < 0) {
                         int aux = y;
                         y = 0;
                         position.y -= aux;
                     }
-                    else if ((position.y +18) > mapData.height) {
+                    else if ((position.y +20) > mapData.height) {
                         position.y -= 1;
                     }
                     int gid = mapLayerItem->data->Get(x, y);

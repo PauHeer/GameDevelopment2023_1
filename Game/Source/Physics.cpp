@@ -343,6 +343,18 @@ bool Physics::PostUpdate()
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+		FPScap = !FPScap;
+
+		if (!FPScap) {
+			app->maxFrameDuration = 16;
+		}
+
+		else if (FPScap) {
+			app->maxFrameDuration = 32;
+		}
+	}
+
 
 	return ret;
 }

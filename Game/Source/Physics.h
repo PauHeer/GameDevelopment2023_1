@@ -89,6 +89,10 @@ private:
 	// Debug mode
 	bool debug;
 
+	// FPS cap
+	bool FPScap;
+
+	pugi::xml_document configFile;
 	// Box2D World
 	/*b2World* world;*/
 };
