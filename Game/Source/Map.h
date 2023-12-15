@@ -134,6 +134,9 @@ public:
     // Called before render is available
     bool Awake(pugi::xml_node& conf);
 
+	// Called before the first frame
+	bool Start();
+
 	// Called each loop iteration
 	bool Update(float dt);
 
@@ -142,6 +145,8 @@ public:
 
     // Load new map
     bool Load();
+
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
 	bool isDoorColliderActive = true;
 
@@ -172,8 +177,10 @@ private:
 
     SString mapFileName;
 	SString mapFolder;
+	MapLayer* navigationLayer;
     bool mapLoaded;
 	bool firstRender = false;
+	int blockedGid = 49;
 };
 
 #endif // __MAP_H__
