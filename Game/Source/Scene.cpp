@@ -74,7 +74,7 @@ bool Scene::Start()
 		app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.Count());
 
-	app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg", 1.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/Goonies.ogg", 1.0f);
 	return true;
 }
 
