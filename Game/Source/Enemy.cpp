@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -34,21 +35,34 @@ bool Enemy::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
+	// Texture to highligh pathfinding
+	pathfindingTex = app->tex->Load("Assets/Maps/tileSelection.png");
+
 	return true;
 }
 
 bool Enemy::Update(float dt)
 {
+	iPoint enemyPos = iPoint(position.x, position.y);
+	Player* player = app->scene->GetPlayer();
+	iPoint playerPos = player->position;
+
 	// Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	app->render->DrawTexture(texture, position.x, position.y);
-	if (isPicked == true)
+	
+	app->map->pathfinding->CreatePath(enemyPos, playerPos);
+
+	// Get the latest calculated path and draw
+	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	for (uint i = 0; i < path->Count(); ++i)
 	{
-		app->entityManager->DestroyEntity(this);
-		app->physics->world->DestroyBody(pbody->body);
+		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
 	}
+
 	return true;
 }
 

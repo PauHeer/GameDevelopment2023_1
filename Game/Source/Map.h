@@ -180,7 +180,7 @@ private:
 	MapLayer* navigationLayer;
     bool mapLoaded;
 	bool firstRender = false;
-	int blockedGid = 49;
+	int blockedGid = 1;
 };
 
 #endif // __MAP_H__
