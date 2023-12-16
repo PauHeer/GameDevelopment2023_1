@@ -12,7 +12,7 @@
   <window>
     <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>
-    <borderless value="false"/>
+    <borderless value="true"/>
     <resizable value="false"/>
     <fullscreen_window value="false"/>
   </window>
@@ -50,7 +50,7 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-    <mapfile path="Assets/Maps/MapTemplate.tmx"/>
+    <mapfile path="Assets/Maps/MapDungeonKnight.tmx"/>
   </map>
   
 </config>
