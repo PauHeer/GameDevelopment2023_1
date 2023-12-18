@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="344">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="344">
  <tileset firstgid="1" name="Collisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="3" columns="3">
   <image source="MapMetadata.png" width="100" height="34"/>
  </tileset>
@@ -77369,10 +77369,10 @@
    <tile gid="3540"/>
    <tile gid="3542"/>
    <tile gid="3543"/>
-   <tile gid="3427"/>
-   <tile gid="3427"/>
-   <tile gid="3427"/>
-   <tile gid="3427"/>
+   <tile gid="3429"/>
+   <tile gid="3429"/>
+   <tile gid="3429"/>
+   <tile gid="3429"/>
    <tile gid="3388"/>
    <tile gid="62"/>
    <tile/>
@@ -77557,7 +77557,7 @@
    <tile gid="55"/>
    <tile gid="70"/>
    <tile gid="3466"/>
-   <tile gid="3426"/>
+   <tile gid="3429"/>
    <tile gid="3978"/>
    <tile gid="3978"/>
    <tile gid="3978"/>
@@ -95428,9 +95428,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="3426"/>
+   <tile gid="3427"/>
+   <tile gid="3428"/>
    <tile/>
    <tile/>
    <tile/>
@@ -95815,9 +95815,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="3429"/>
+   <tile gid="3429"/>
+   <tile gid="3429"/>
    <tile/>
    <tile/>
    <tile/>
