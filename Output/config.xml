@@ -40,6 +40,8 @@
 	<item x="192" y="2720" texturepath="Assets/Textures/goldCoin.png"/>
 	<item x="704" y="2112" texturepath="Assets/Textures/goldCoin.png"/>
     <enemy x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <enemy x="400" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <enemy x="300" y="672" texturepath="Assets/Textures/enemy1.png"/>
 
 
 

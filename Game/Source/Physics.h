@@ -32,7 +32,8 @@ enum class ColliderType {
 	DAMAGE,
 	ENEMY,
 	DOOR,
-	ATTACK
+	ATTACK,
+	CHECKPOINT
 	// ..
 };
 

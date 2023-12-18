@@ -44,6 +44,7 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 	Player* player;
+	PhysBody* checkp;
 
 };
 

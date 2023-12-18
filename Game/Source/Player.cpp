@@ -210,6 +210,9 @@ bool Player::Update(float dt)
 
 		// Attack animation
 		
+		// Destroy the attack sensor
+		//app->physics->DestroyBody(sensor);
+		//sensor = nullptr;
 	}
 
 	//Update player position in pixels
