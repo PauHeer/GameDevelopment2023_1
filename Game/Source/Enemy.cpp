@@ -30,10 +30,10 @@ bool Enemy::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
-	pbody->body->SetFixedRotation(true);
-	pbody->ctype = ColliderType::ENEMY;
-	pbody->listener = this;
+	ebody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
+	ebody->body->SetFixedRotation(true);
+	ebody->ctype = ColliderType::ENEMY;
+	ebody->listener = this;
 
 	// Texture to highligh pathfinding
 	pathfindingTex = app->tex->Load("Assets/Maps/tileSelection.png");
@@ -43,24 +43,36 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
-	iPoint enemyPos = iPoint(position.x, position.y);
-	Player* player = app->scene->GetPlayer();
-	iPoint playerPos = player->position;
+	if (ebody != nullptr) {
+		// Add a physics to an item - update the position of the object from the physics.  
+		position.x = METERS_TO_PIXELS(ebody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(ebody->body->GetTransform().p.y) - 16;
 
-	// Add a physics to an item - update the position of the object from the physics.  
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		app->render->DrawTexture(texture, position.x, position.y);
+	}
 
-	app->render->DrawTexture(texture, position.x, position.y);
-	
-	app->map->pathfinding->CreatePath(enemyPos, playerPos);
+	// Do only while enemy is alive
+	if (ebody != nullptr) {
+		// Enemy and Player position for pathfinding
+		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
+		Player* player = app->scene->GetPlayer();
+		iPoint playerPos = app->map->WorldToMap(player->position.x, player->position.y);
 
-	// Get the latest calculated path and draw
-	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-	for (uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
+		app->map->pathfinding->CreatePath(enemyPos, playerPos);
+
+		// Get the latest calculated path and draw
+		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+		for (uint i = 0; i < path->Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+			app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
+		}
+	}
+
+	// Destroy enemy collider
+	if (enemyKilled == true) {
+		app->physics->DestroyBody(ebody);
+		ebody = nullptr;
 	}
 
 	return true;
@@ -71,5 +83,12 @@ bool Enemy::CleanUp()
 	return true;
 }
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::ATTACK:
+		enemyKilled = true;
 
+		LOG("Collision ATTACK");
+		break;
+	}
 }

@@ -32,8 +32,9 @@ private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
-	PhysBody* pbody;
+	PhysBody* ebody;
 	SDL_Texture* pathfindingTex = nullptr;
+	bool enemyKilled = false;
 };
 
 #endif // __ENEMY_H__

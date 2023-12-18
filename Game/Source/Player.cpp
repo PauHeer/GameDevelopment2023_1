@@ -84,6 +84,8 @@ bool Player::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
+	sensor = nullptr;
+
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/coinSound.ogg");
 
 	gravityScale = pbody->body->GetGravityScale();
@@ -199,6 +201,17 @@ bool Player::Update(float dt)
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		// Create the attack sensor
+		sensor = app->physics->CreateRectangleSensor(position.x + 60, position.y + 30, 50, 10, bodyType::KINEMATIC);
+		sensor->listener = this;
+		sensor->ctype = ColliderType::ATTACK;
+
+		// Attack animation
+		
+	}
+
 	//Update player position in pixels
 	else {
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
