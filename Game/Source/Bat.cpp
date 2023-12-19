@@ -38,9 +38,10 @@ bool Bat::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	bat = app->physics->CreateRectangle(position.x, position.y, 27, 21, bodyType::KINEMATIC);
+	bat = app->physics->CreateRectangle(position.x, position.y, 27, 21, bodyType::DYNAMIC);
 	bat->body->SetFixedRotation(true);
-	bat->ctype = ColliderType::ENEMY;
+	bat->body->SetGravityScale(0.0f);
+	bat->ctype = ColliderType::BAT;
 	bat->listener = this;
 
 	// Texture to highligh pathfinding
@@ -53,10 +54,6 @@ bool Bat::Start() {
 
 bool Bat::Update(float dt)
 {
-	b2Vec2 vel = bat->body->GetLinearVelocity();
-	vel.y = 0;
-	vel.x = 0;
-
 	if (bat != nullptr) {
 		// Add a physics to an item - update the position of the object from the physics.  
 		position.x = METERS_TO_PIXELS(bat->body->GetTransform().p.x) - 16;
@@ -81,9 +78,9 @@ bool Bat::Update(float dt)
 		{
 			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 			app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
-			vel.x = pos.x;
-			vel.y = pos.y;
-			bat->body->SetLinearVelocity(vel);
+			//vel.x = pos.x;
+			//vel.y = pos.y;
+			//bat->body->SetLinearVelocity(vel);
 		}
 	}
 

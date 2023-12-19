@@ -288,7 +288,7 @@ void Player::HandleAttack() {
 	}
 
 	// Create the attack sensor
-	sensor = app->physics->CreateRectangleSensor(position.x + 60, position.y + 30, 50, 10, bodyType::KINEMATIC);
+	sensor = app->physics->CreateRectangleSensor(position.x + 60, position.y + 30, 50, 30, bodyType::KINEMATIC);
 	sensor->listener = this;
 	sensor->ctype = ColliderType::ATTACK;
 

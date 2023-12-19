@@ -45,5 +45,12 @@ bool Checkpoint::CleanUp()
 	return true;
 }
 void Checkpoint::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		app->SaveRequest();
 
+		LOG("Collision Checkpoint");
+		break;
+	}
 }

@@ -30,7 +30,8 @@ enum class ColliderType {
 	WALL,
 	UNKNOWN,
 	DAMAGE,
-	ENEMY,
+	SHADOW,
+	BAT,
 	DOOR,
 	ATTACK,
 	CHECKPOINT

@@ -32,7 +32,7 @@ bool Shadow::Start() {
 	texture = app->tex->Load(texturePath);
 	shadow = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
 	shadow->body->SetFixedRotation(true);
-	shadow->ctype = ColliderType::ENEMY;
+	shadow->ctype = ColliderType::SHADOW;
 	shadow->listener = this;
 
 	// Texture to highligh pathfinding

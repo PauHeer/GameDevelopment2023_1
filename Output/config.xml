@@ -40,9 +40,7 @@
 	  <item x="192" y="2720" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="704" y="2112" texturepath="Assets/Textures/goldCoin.png"/>
     <shadow x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <shadow x="400" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <shadow x="300" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <bat x="300" y="372" texturepath="Assets/Textures/bat.png"/>
+    <bat x="300" y="300" texturepath="Assets/Textures/bat.png"/>
     <checkpoint x="2848" y="1040"/>
 
 
