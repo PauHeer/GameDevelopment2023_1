@@ -4,7 +4,8 @@
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
-#include "Enemy.h"
+#include "Shadow.h"
+#include "Bat.h"
 #include "Checkpoint.h"
 
 struct SDL_Texture;

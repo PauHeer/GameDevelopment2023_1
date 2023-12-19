@@ -39,9 +39,10 @@
 	  <item x="224" y="2272" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="192" y="2720" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="704" y="2112" texturepath="Assets/Textures/goldCoin.png"/>
-    <enemy x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <enemy x="400" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <enemy x="300" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <shadow x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <shadow x="400" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <shadow x="300" y="672" texturepath="Assets/Textures/enemy1.png"/>
+    <bat x="300" y="372" texturepath="Assets/Textures/bat.png"/>
     <checkpoint x="2848" y="1040"/>
 
 

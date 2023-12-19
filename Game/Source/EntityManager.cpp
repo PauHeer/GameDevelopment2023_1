@@ -87,8 +87,11 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
-	case EntityType::ENEMY:
-		entity = new Enemy();
+	case EntityType::SHADOW:
+		entity = new Shadow();
+		break;
+	case EntityType::BAT:
+		entity = new Bat();
 		break;
 	case EntityType::CHECKPOINT:
 		entity = new Checkpoint();

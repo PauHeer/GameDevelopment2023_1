@@ -1,18 +1,19 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __BAT_H__
+#define __BAT_H__
 
+#include "Animation.h"
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
 
-class Enemy : public Entity
+class Bat : public Entity
 {
 public:
 
-	Enemy();
-	virtual ~Enemy();
+	Bat();
+	virtual ~Bat();
 
 	bool Awake();
 
@@ -28,9 +29,13 @@ private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
-	PhysBody* ebody;
+	PhysBody* bat;
 	SDL_Texture* pathfindingTex = nullptr;
 	bool enemyKilled = false;
+
+	Animation* currentAnimation = NULL;
+
+	Animation idleAnim;
 };
 
-#endif // __ENEMY_H__
+#endif // __BAT_H__

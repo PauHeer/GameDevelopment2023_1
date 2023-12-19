@@ -23,8 +23,9 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Shadow.cpp" />
     <ClCompile Include="Source\Checkpoint.cpp" />
+    <ClCompile Include="Source\Bat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -72,8 +73,9 @@
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Source\Pathfinding.h" />
-    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\Shadow.h" />
     <ClInclude Include="Source\Checkpoint.h" />
+    <ClInclude Include="Source\Bat.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

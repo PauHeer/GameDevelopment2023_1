@@ -24,17 +24,9 @@ public:
 
 	bool CleanUp();
 
-	bool Jumping = false;
-
-	int jumpCounter = 0;
-
-	bool playerDead = false;
-
-	bool godMode = false;
-
-	bool haveKey = true;
-
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+
+	void HandleAttack();
 
 public:
 	float speed = 0.35f;
@@ -45,8 +37,13 @@ public:
 	PhysBody* sensor;
 
 	int pickCoinFxId;
-
 	int gravityScale;
+	int jumpCounter = 0;
+
+	bool Jumping = false;
+	bool playerDead = false;
+	bool godMode = false;
+	bool haveKey = true;
 
 	Animation* currentAnimation = NULL;
 
@@ -55,6 +52,7 @@ public:
 	Animation downAnim;
 	Animation leftAnim;
 	Animation rightAnim;
+	Animation attackAnim;
 	Animation dieAnim;
 };
 

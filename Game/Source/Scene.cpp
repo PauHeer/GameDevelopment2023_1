@@ -33,10 +33,16 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
-	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+	for (pugi::xml_node itemNode = config.child("shadow"); itemNode; itemNode = itemNode.next_sibling("shadow"))
 	{
-		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->parameters = itemNode;
+		Shadow* shadow = (Shadow*)app->entityManager->CreateEntity(EntityType::SHADOW);
+		shadow->parameters = itemNode;
+	}
+
+	for (pugi::xml_node itemNode = config.child("bat"); itemNode; itemNode = itemNode.next_sibling("bat"))
+	{
+		Bat* bat = (Bat*)app->entityManager->CreateEntity(EntityType::BAT);
+		bat->parameters = itemNode;
 	}
 	
 	for (pugi::xml_node itemNode = config.child("checkpoint"); itemNode; itemNode = itemNode.next_sibling("checkpoint"))

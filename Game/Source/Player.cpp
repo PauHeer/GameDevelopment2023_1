@@ -49,6 +49,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	upAnim.loop = true;
 	upAnim.speed = 0.3f;
 
+	attackAnim.PushBack({ 0, 313, 59, 58 });
+	attackAnim.PushBack({ 219, 304, 103, 67 });
+	attackAnim.PushBack({ 417, 315, 101, 56 });
+	attackAnim.PushBack({ 612, 317, 91, 54 });
+	attackAnim.loop = false;
+	attackAnim.speed = 0.3f;
+
 	dieAnim.PushBack({ 0, 121, 39, 54 });
 	dieAnim.PushBack({ 173, 120, 39, 54 });
 	dieAnim.PushBack({ 347, 132, 44, 33 });
@@ -172,8 +179,8 @@ bool Player::Update(float dt)
 			vel.x = (speed * dt);
 		}
 	}
-
-	if ((vel.x == 0) && (vel.y == 0)) {
+	
+	if ((vel.x == 0) && (vel.y == 0) && (currentAnimation != &attackAnim)) {
 		if (currentAnimation != &idleAnim) {
 			idleAnim.Reset();
 			currentAnimation = &idleAnim;
@@ -203,16 +210,11 @@ bool Player::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		// Create the attack sensor
-		sensor = app->physics->CreateRectangleSensor(position.x + 60, position.y + 30, 50, 10, bodyType::KINEMATIC);
-		sensor->listener = this;
-		sensor->ctype = ColliderType::ATTACK;
-
-		// Attack animation
-		
-		// Destroy the attack sensor
-		//app->physics->DestroyBody(sensor);
-		//sensor = nullptr;
+		HandleAttack();
+		if ((currentAnimation == &attackAnim) && (currentAnimation->HasFinished())) {
+			idleAnim.Reset();
+			currentAnimation = &idleAnim;
+		}
 	}
 
 	//Update player position in pixels
@@ -283,5 +285,25 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		LOG("Collision DOOR");
 		break;
+	}
+}
+
+void Player::HandleAttack() {
+	// Attack animation
+	if (currentAnimation != &attackAnim) {
+		attackAnim.Reset();
+		currentAnimation = &attackAnim;
+	}
+
+	// Create the attack sensor
+	sensor = app->physics->CreateRectangleSensor(position.x + 60, position.y + 30, 50, 10, bodyType::KINEMATIC);
+	sensor->listener = this;
+	sensor->ctype = ColliderType::ATTACK;
+
+	// Check if attack animation has finished
+	if (currentAnimation->HasFinished()) {
+		// Destroy the attack sensor
+		app->physics->DestroyBody(sensor);
+		sensor = nullptr;
 	}
 }

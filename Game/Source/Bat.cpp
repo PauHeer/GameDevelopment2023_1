@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Bat.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -10,14 +10,22 @@
 #include "Physics.h"
 #include "Map.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+Bat::Bat() : Entity(EntityType::BAT)
 {
-	name.Create("enemy");
+	name.Create("bat");
+
+	/* Animacion para 32x32-bat-sprite-4
+	idleAnim.PushBack({ 35, 5, 26, 21 });
+	idleAnim.PushBack({ 66, 6, 28, 14 });
+	idleAnim.PushBack({ 97, 1, 30, 20 });
+	idleAnim.loop = true;
+	idleAnim.speed = 0.2f;
+	*/
 }
 
-Enemy::~Enemy() {}
+Bat::~Bat() {}
 
-bool Enemy::Awake() {
+bool Bat::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -26,39 +34,41 @@ bool Enemy::Awake() {
 	return true;
 }
 
-bool Enemy::Start() {
+bool Bat::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	ebody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
-	ebody->body->SetFixedRotation(true);
-	ebody->ctype = ColliderType::ENEMY;
-	ebody->listener = this;
+	bat = app->physics->CreateRectangle(position.x, position.y, 27, 21, bodyType::KINEMATIC);
+	bat->body->SetFixedRotation(true);
+	bat->ctype = ColliderType::ENEMY;
+	bat->listener = this;
 
 	// Texture to highligh pathfinding
 	pathfindingTex = app->tex->Load("Assets/Maps/tileSelection.png");
 
+	//currentAnimation = &idleAnim;
+
 	return true;
 }
 
-bool Enemy::Update(float dt)
+bool Bat::Update(float dt)
 {
-	if (ebody != nullptr) {
+	if (bat != nullptr) {
 		// Add a physics to an item - update the position of the object from the physics.  
-		position.x = METERS_TO_PIXELS(ebody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(ebody->body->GetTransform().p.y) - 16;
+		position.x = METERS_TO_PIXELS(bat->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(bat->body->GetTransform().p.y) - 16;
 
 		app->render->DrawTexture(texture, position.x, position.y);
 
 	}
 
 	// Do only while enemy is alive
-	if (ebody != nullptr) {
+	if (bat != nullptr) {
 		// Enemy and Player position for pathfinding
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 		Player* player = app->scene->GetPlayer();
 		iPoint playerPos = app->map->WorldToMap(player->position.x, player->position.y);
-		
+
 		app->map->pathfinding->CreatePath(enemyPos, playerPos);
 
 		// Get the latest calculated path and draw
@@ -72,18 +82,18 @@ bool Enemy::Update(float dt)
 
 	// Destroy enemy collider
 	if (enemyKilled == true) {
-		app->physics->DestroyBody(ebody);
-		ebody = nullptr;
+		app->physics->DestroyBody(bat);
+		bat = nullptr;
 	}
 
 	return true;
 }
 
-bool Enemy::CleanUp()
+bool Bat::CleanUp()
 {
 	return true;
 }
-void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Bat::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::ATTACK:
