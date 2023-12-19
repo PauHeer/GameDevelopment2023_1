@@ -38,12 +38,12 @@ bool Scene::Awake(pugi::xml_node& config)
 		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 		enemy->parameters = itemNode;
 	}
-	/*
+	
 	for (pugi::xml_node itemNode = config.child("checkpoint"); itemNode; itemNode = itemNode.next_sibling("checkpoint"))
 	{
-		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->parameters = itemNode;
-	}*/
+		Checkpoint* checkpoint = (Checkpoint*)app->entityManager->CreateEntity(EntityType::CHECKPOINT);
+		checkpoint->parameters = itemNode;
+	}
 
 	if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);

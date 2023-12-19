@@ -24,10 +24,6 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-public:
-
-	bool isPicked = false;
-
 private:
 
 	SDL_Texture* texture;

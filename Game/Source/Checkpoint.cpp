@@ -21,19 +21,22 @@ bool Checkpoint::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
 }
 
 bool Checkpoint::Start() {
 
+	// Create collider
+	checkp = app->physics->CreateRectangleSensor(position.x, position.y, 64, 32, bodyType::STATIC);
+	checkp->ctype = ColliderType::CHECKPOINT;
+	checkp->listener = this;
+
 	return true;
 }
 
 bool Checkpoint::Update(float dt)
 {
-
 	return true;
 }
 

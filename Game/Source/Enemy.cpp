@@ -49,6 +49,7 @@ bool Enemy::Update(float dt)
 		position.y = METERS_TO_PIXELS(ebody->body->GetTransform().p.y) - 16;
 
 		app->render->DrawTexture(texture, position.x, position.y);
+
 	}
 
 	// Do only while enemy is alive
@@ -57,7 +58,7 @@ bool Enemy::Update(float dt)
 		iPoint enemyPos = app->map->WorldToMap(position.x, position.y);
 		Player* player = app->scene->GetPlayer();
 		iPoint playerPos = app->map->WorldToMap(player->position.x, player->position.y);
-
+		
 		app->map->pathfinding->CreatePath(enemyPos, playerPos);
 
 		// Get the latest calculated path and draw
