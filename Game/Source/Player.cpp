@@ -111,8 +111,8 @@ bool Player::Update(float dt)
 		godMode = !godMode;
 	}
 
-	if (godMode == false)
-	{
+	if (godMode == false){
+
 		pbody->body->SetGravityScale(gravityScale);
 		pbody->body->GetFixtureList()->SetSensor(false);
 
@@ -122,7 +122,6 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel.x = (-speed * dt);
-
 			if (currentAnimation != &leftAnim) {
 				leftAnim.Reset();
 				currentAnimation = &leftAnim;
@@ -131,20 +130,17 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel.x = (speed * dt);
-
 			if (currentAnimation != &rightAnim) {
 				rightAnim.Reset();
 				currentAnimation = &rightAnim;
 			}
 		}
 
-		if (Jumping != true)
-		{
+		if (Jumping != true){
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 				vel.y = -12.0f;
 				jumpCounter++;
-				if (jumpCounter > 1)
-				{
+				if (jumpCounter > 1){
 					Jumping = true;
 				}
 
@@ -187,12 +183,8 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//Set the velocity of the pbody of the player
-	//if (Jumping != true)
-	//{
 		pbody->body->SetLinearVelocity(vel);
-	//}
-	
+
 	currentAnimation->Update();
 
 	//Moves the player to the start
@@ -220,7 +212,7 @@ bool Player::Update(float dt)
 	//Update player position in pixels
 	else {
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 30;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 28;
 
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		app->render->DrawTexture(texture, position.x, position.y, &rect);
