@@ -49,12 +49,12 @@ Player::Player() : Entity(EntityType::PLAYER)
 	upAnim.loop = true;
 	upAnim.speed = 0.3f;
 
-	attackAnim.PushBack({ 0, 313, 59, 58 });
-	attackAnim.PushBack({ 219, 304, 103, 67 });
-	attackAnim.PushBack({ 417, 315, 101, 56 });
-	attackAnim.PushBack({ 612, 317, 91, 54 });
-	attackAnim.loop = false;
-	attackAnim.speed = 0.3f;
+	attackAnim.PushBack({ 0, 307, 59, 65 });
+	attackAnim.PushBack({ 219, 307, 103, 65 });
+	attackAnim.PushBack({ 417, 307, 101, 65 });
+	attackAnim.PushBack({ 612, 307, 91, 65 });
+	attackAnim.loop = true;
+	attackAnim.speed = 0.2f;
 
 	dieAnim.PushBack({ 0, 121, 39, 54 });
 	dieAnim.PushBack({ 173, 120, 39, 54 });
