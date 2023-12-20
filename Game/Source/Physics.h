@@ -87,10 +87,10 @@ public:
 	void DestroyBody(PhysBody* body);
 	b2World* world;
 
-private:
-
 	// Debug mode
 	bool debug;
+
+private:
 
 	// FPS cap
 	bool FPScap;

@@ -24,7 +24,7 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	bool IsInRange(iPoint playerPos, iPoint enemyPos);
+	bool IsInRange(iPoint playerPos, iPoint enemyPos, int range);
 
 public:
 

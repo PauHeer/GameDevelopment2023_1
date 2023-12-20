@@ -59,19 +59,20 @@ bool Shadow::Update(float dt)
 		Player* player = app->scene->GetPlayer();
 		iPoint playerPos = app->map->WorldToMap(player->position.x, player->position.y);
 		
-		if (IsInRange(playerPos, enemyPos)) {
+		if (IsInRange(playerPos, enemyPos, 10)) {
 
 			app->map->pathfinding->CreatePath(enemyPos, playerPos);
 
-			// Get the latest calculated path and draw
+			// Get the latest calculated path
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-			for (uint i = 0; i < path->Count(); ++i)
-			{
-				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
-				//vel.x = pos.x;
-				//vel.y = pos.y;
-				//bat->body->SetLinearVelocity(vel);
+
+			// Draws the pathfinding
+			if (app->physics->debug) {
+				for (uint i = 0; i < path->Count(); ++i)
+				{
+					iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
+				}
 			}
 		}
 	}
@@ -100,12 +101,12 @@ void Shadow::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Shadow::IsInRange(iPoint playerPos, iPoint enemyPos) {
-	iPoint range;
+bool Shadow::IsInRange(iPoint playerPos, iPoint enemyPos, int range) {
+	iPoint distance;
 
-	range.x = enemyPos.x - playerPos.x;
-	range.y = playerPos.y - enemyPos.y;
-	if (range.x < 10 && range.y < 10) return true;
+	distance.x = abs(enemyPos.x - playerPos.x);
+	distance.y = abs(playerPos.y - enemyPos.y);
+	if (distance.x < range && distance.y < range) return true;
 
 	else return false;
 }
