@@ -2,8 +2,7 @@
 
 ## Description
 
-{project description}
-
+This is a project game made by students of CITM in 2023 as a part of a subject.
 ## Key Features
 
  - F3 moves the player to the start
