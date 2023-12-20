@@ -58727,7 +58727,7 @@
    <tile gid="13"/>
    <tile gid="13"/>
    <tile gid="13"/>
-   <tile gid="3465"/>
+   <tile gid="3454"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
@@ -58823,7 +58823,7 @@
    <tile gid="13"/>
    <tile gid="13"/>
    <tile gid="13"/>
-   <tile gid="3465"/>
+   <tile gid="3454"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
    <tile gid="3389"/>
@@ -77173,7 +77173,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3551"/>
+   <tile gid="3395"/>
    <tile/>
    <tile/>
    <tile/>
@@ -77269,7 +77269,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3570"/>
+   <tile gid="3395"/>
    <tile/>
    <tile/>
    <tile/>
@@ -93608,7 +93608,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="3590"/>
    <tile/>
    <tile/>
    <tile/>
@@ -95619,7 +95619,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3357"/>
+   <tile gid="3454"/>
    <tile/>
    <tile/>
    <tile/>
@@ -95715,7 +95715,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3357"/>
+   <tile gid="3454"/>
    <tile/>
    <tile/>
    <tile/>
@@ -120201,7 +120201,5 @@
   <object id="314" x="1922" y="3060.67" width="316" height="9.33333"/>
   <object id="333" x="33" y="3061.5" width="350" height="9"/>
  </objectgroup>
- <objectgroup id="27" name="Doors">
-  <object id="274" x="2785.46" y="1087.7" width="6.18182" height="64.1818"/>
- </objectgroup>
+ <objectgroup id="27" name="Doors"/>
 </map>
