@@ -226,8 +226,8 @@ bool Player::Update(float dt)
 		float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
 		float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
 
-		if ((centerX - position.x < 0) && (centerX - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
-		if ((centerY - position.y < 0) && (centerY - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
+		if ((centerX - position.x < 0) && (centerX - position.x > -2090)) app->render->camera.x = xLerp;
+		if ((centerY - position.y < 0) && (centerY - position.y > -2350)) app->render->camera.y = yLerp;
 	}
 
 	//Moves the player to the start
@@ -273,15 +273,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision DAMAGE");
 		break;
 	case ColliderType::SHADOW:
-		if (godMode == false) {
-			playerDead = true;
-		}
 		LOG("Collision SHADOW");
 		break;
 	case ColliderType::BAT:
-		if (godMode == false) {
-			playerDead = true;
-		}
 		LOG("Collision BAT");
 		break;
 	case ColliderType::DOOR:
