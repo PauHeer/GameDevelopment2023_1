@@ -90,6 +90,7 @@ bool Player::Start() {
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
+	pbody->body->GetFixtureList()[0].SetFriction(0);
 
 	sensor = nullptr;
 
