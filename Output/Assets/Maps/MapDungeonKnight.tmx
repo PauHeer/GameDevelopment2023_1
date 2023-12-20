@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="356">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="358">
  <tileset firstgid="1" name="Collisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="3" columns="3">
   <image source="MapMetadata.png" width="100" height="34"/>
  </tileset>
@@ -120034,8 +120034,8 @@
   <object id="334" x="1847" y="2175.67" width="113.667" height="9.66667"/>
   <object id="345" x="608.667" y="896" width="62" height="27.3333"/>
   <object id="350" x="672" y="959" width="448" height="17.5"/>
-  <object id="354" x="2987.64" y="523.636"/>
-  <object id="355" x="3020" y="491.636"/>
+  <object id="356" x="2978.73" y="514.545" width="28" height="28.7273"/>
+  <object id="357" x="3010.55" y="482.364" width="28" height="29.6364"/>
  </objectgroup>
  <objectgroup id="24" name="Walls">
   <properties>
