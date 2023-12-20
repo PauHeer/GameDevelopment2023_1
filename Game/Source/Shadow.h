@@ -24,6 +24,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	bool IsInRange(iPoint playerPos, iPoint enemyPos);
+
 private:
 
 	SDL_Texture* texture;

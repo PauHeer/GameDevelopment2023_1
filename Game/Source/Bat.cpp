@@ -70,17 +70,20 @@ bool Bat::Update(float dt)
 		Player* player = app->scene->GetPlayer();
 		iPoint playerPos = app->map->WorldToMap(player->position.x, player->position.y);
 
-		app->map->pathfinding->CreatePath(enemyPos, playerPos);
+		if (IsInRange(playerPos, enemyPos)) {
 
-		// Get the latest calculated path and draw
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-		for (uint i = 0; i < path->Count(); ++i)
-		{
-			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-			app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
-			//vel.x = pos.x;
-			//vel.y = pos.y;
-			//bat->body->SetLinearVelocity(vel);
+			app->map->pathfinding->CreatePath(enemyPos, playerPos);
+
+			// Get the latest calculated path and draw
+			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+			for (uint i = 0; i < path->Count(); ++i)
+			{
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				app->render->DrawTexture(pathfindingTex, pos.x, pos.y);
+				//vel.x = pos.x;
+				//vel.y = pos.y;
+				//bat->body->SetLinearVelocity(vel);
+			}
 		}
 	}
 
@@ -97,6 +100,7 @@ bool Bat::CleanUp()
 {
 	return true;
 }
+
 void Bat::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
@@ -106,4 +110,14 @@ void Bat::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ATTACK");
 		break;
 	}
+}
+
+bool Bat::IsInRange(iPoint playerPos, iPoint enemyPos) {
+	iPoint range;
+
+	range.x = enemyPos.x - playerPos.x;
+	range.y = playerPos.y - enemyPos.y;
+	if (range.x < 10 && range.y < 10) return true;
+
+	else return false;
 }

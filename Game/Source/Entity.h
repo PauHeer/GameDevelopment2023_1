@@ -76,6 +76,10 @@ public:
 
 	};
 
+	virtual bool IsInRange(iPoint playerPos, iPoint enemyPos) {
+		return false;
+	};
+
 public:
 
 	SString name;
