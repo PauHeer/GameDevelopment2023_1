@@ -1,4 +1,4 @@
-# {Project Name}
+# Game Development
 
 ## Description
 
@@ -6,21 +6,23 @@
 
 ## Key Features
 
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
+ - F3 moves the player to the start
+ - F5 save game
+ - F6 load game
+ - F9 debug mode
+ - F10 god mode
+ - F11 FPS cap
  
 ## Controls
 
- - {ControlsScheme}
+ - W, A, S, D to move
+ - SPACE to jump
+ - F to attack
 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - Pau Hernández
+ - Eduardo Bergillos
 
 ## License
 
