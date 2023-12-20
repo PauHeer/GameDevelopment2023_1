@@ -23,12 +23,12 @@
   </audio>
 
   <scene>
-    <player x="112" y="672" texturepath="Assets/Textures/_Idle.png"/>
-    <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+      <player x="112" y="672" texturepath="Assets/Textures/_Idle.png"/>
+      <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
+      <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
+      <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
+      <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+      <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="832" y="192" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="96" y="384" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="992" y="544" texturepath="Assets/Textures/goldCoin.png"/>
@@ -39,9 +39,19 @@
 	  <item x="224" y="2272" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="192" y="2720" texturepath="Assets/Textures/goldCoin.png"/>
 	  <item x="704" y="2112" texturepath="Assets/Textures/goldCoin.png"/>
-    <shadow x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
-    <bat x="300" y="300" texturepath="Assets/Textures/bat.png"/>
-    <checkpoint x="2848" y="1040"/>
+      <shadow x="500" y="672" texturepath="Assets/Textures/enemy1.png"/>
+	  <shadow x="800" y="2968" texturepath="Assets/Textures/enemy1.png"/>
+	  <shadow x="2528" y="2816" texturepath="Assets/Textures/enemy1.png"/>
+      <bat x="500" y="300" texturepath="Assets/Textures/bat.png"/>
+	  <bat x="960" y="2784" texturepath="Assets/Textures/bat.png"/>
+	  <bat x="1408" y="2528" texturepath="Assets/Textures/bat.png"/>
+
+
+
+
+
+
+	  <checkpoint x="2848" y="1040"/>
 
 
 
