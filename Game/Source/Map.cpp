@@ -391,19 +391,19 @@ bool Map::LoadGroup(pugi::xml_node& node, ObjectLayer* object)
         int y = Object.attribute("y").as_int();
 
         //Create collider
-        if (node.attribute("id").as_int() == 13)
+        if (node.attribute("id").as_int() == 13)//Platforms
         {
-            PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 4), width, height / 2, STATIC);
+            PhysBody* p = app->physics->CreateRectangle(x + (width / 2), y + (height / 4), width-4, height / 2, STATIC);
             p->ctype = ColliderType::PLATFORM;
-            PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height * 0.75), width, height / 2, STATIC);
+            PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
             w->ctype = ColliderType::WALL;
         }
-        if (node.attribute("id").as_int() == 24)
+        if (node.attribute("id").as_int() == 24)//Walls
         {
             PhysBody* w = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
             w->ctype = ColliderType::WALL;
         }
-        if (node.attribute("id").as_int() == 27)
+        if (node.attribute("id").as_int() == 27)//Door
         {
             PhysBody* door = app->physics->CreateRectangle(x + (width / 2), y + (height / 2), width, height, STATIC);
             door->ctype = ColliderType::DOOR;
