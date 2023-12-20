@@ -41,13 +41,13 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	for (pugi::xml_node itemNode = config.child("bat"); itemNode; itemNode = itemNode.next_sibling("bat"))
 	{
-		Bat* bat = (Bat*)app->entityManager->CreateEntity(EntityType::BAT);
+		bat = (Bat*)app->entityManager->CreateEntity(EntityType::BAT);
 		bat->parameters = itemNode;
 	}
 	
 	for (pugi::xml_node itemNode = config.child("checkpoint"); itemNode; itemNode = itemNode.next_sibling("checkpoint"))
 	{
-		Checkpoint* checkpoint = (Checkpoint*)app->entityManager->CreateEntity(EntityType::CHECKPOINT);
+		checkpoint = (Checkpoint*)app->entityManager->CreateEntity(EntityType::CHECKPOINT);
 		checkpoint->parameters = itemNode;
 	}
 
@@ -139,6 +139,27 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	return true;
+}
+
+bool Scene::LoadState(pugi::xml_node node) 
+{
+	player->position.x = node.child("player").attribute("x").as_int();
+	player->position.y = node.child("player").attribute("y").as_int();
+	player->texturePath = node.child("player").attribute("texturepath").as_string();
+
+	
+
+	return true;
+}
+
+bool Scene::SaveState(pugi::xml_node node) 
+{
+	pugi::xml_node playerNode = node.append_child("player");
+	playerNode.append_attribute("x").set_value(player->position.x);
+	playerNode.append_attribute("y").set_value(player->position.y);
+	playerNode.append_attribute("texturepath").set_value(player->texturePath);
 
 	return true;
 }

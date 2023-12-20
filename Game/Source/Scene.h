@@ -38,6 +38,10 @@ public:
 	bool CleanUp();
 
 	Player* GetPlayer() { return player; };
+
+	bool LoadState(pugi::xml_node node);
+
+	bool SaveState(pugi::xml_node node);
 	
 
 private:
@@ -46,6 +50,8 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 	Player* player;
+	Checkpoint* checkpoint;
+	Bat* bat;
 	PhysBody* checkp;
 
 };
