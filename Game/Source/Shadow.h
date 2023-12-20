@@ -26,7 +26,7 @@ public:
 
 	bool IsInRange(iPoint playerPos, iPoint enemyPos);
 
-private:
+public:
 
 	SDL_Texture* texture;
 	const char* texturePath;

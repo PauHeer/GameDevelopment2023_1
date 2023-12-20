@@ -52,6 +52,8 @@ private:
 	Player* player;
 	Checkpoint* checkpoint;
 	Bat* bat;
+	Shadow* shadow;
+	Item* item;
 	PhysBody* checkp;
 
 };

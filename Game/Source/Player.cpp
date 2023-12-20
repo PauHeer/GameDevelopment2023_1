@@ -105,134 +105,138 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	b2Vec2 vel = pbody->body->GetLinearVelocity();
-	vel.x = 0;
-	
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
-		godMode = !godMode;
-	}
-
-	if (godMode == false){
-
-		pbody->body->SetGravityScale(gravityScale);
-		pbody->body->GetFixtureList()->SetSensor(false);
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			vel.y = 10.0f;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel.x = (-speed * dt);
-			if (currentAnimation != &leftAnim) {
-				leftAnim.Reset();
-				currentAnimation = &leftAnim;
-			}
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel.x = (speed * dt);
-			if (currentAnimation != &rightAnim) {
-				rightAnim.Reset();
-				currentAnimation = &rightAnim;
-			}
-		}
-
-		if (Jumping != true){
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-				vel.y = -12.0f;
-				jumpCounter++;
-				if (jumpCounter > 1){
-					Jumping = true;
-				}
-
-				if (currentAnimation != &upAnim) {
-					upAnim.Reset();
-					currentAnimation = &upAnim;
-				}
-			}
-		}
-	}
-	
-	else if (godMode == true)
-	{
-		pbody->body->SetGravityScale(0);
-		pbody->body->GetFixtureList()->SetSensor(true);
+	if(pbody != nullptr){
+		b2Vec2 vel = pbody->body->GetLinearVelocity();
 		vel.x = 0;
-		vel.y = 0;
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			vel.y = (-speed * dt);
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			vel.y = (speed * dt);
+		if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+			godMode = !godMode;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel.x = (-speed * dt);
+		if (godMode == false) {
+
+			pbody->body->SetGravityScale(gravityScale);
+			pbody->body->GetFixtureList()->SetSensor(false);
+
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+				vel.y = 10.0f;
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				vel.x = (-speed * dt);
+				if (currentAnimation != &leftAnim) {
+					leftAnim.Reset();
+					currentAnimation = &leftAnim;
+				}
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				vel.x = (speed * dt);
+				if (currentAnimation != &rightAnim) {
+					rightAnim.Reset();
+					currentAnimation = &rightAnim;
+				}
+			}
+
+			if (Jumping != true) {
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+					vel.y = -12.0f;
+					jumpCounter++;
+					if (jumpCounter > 1) {
+						Jumping = true;
+					}
+
+					if (currentAnimation != &upAnim) {
+						upAnim.Reset();
+						currentAnimation = &upAnim;
+					}
+				}
+			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel.x = (speed * dt);
+		else if (godMode == true)
+		{
+			pbody->body->SetGravityScale(0);
+			pbody->body->GetFixtureList()->SetSensor(true);
+			vel.x = 0;
+			vel.y = 0;
+
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+				vel.y = (-speed * dt);
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+				vel.y = (speed * dt);
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				vel.x = (-speed * dt);
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				vel.x = (speed * dt);
+			}
 		}
-	}
-	
-	if ((vel.x == 0) && (vel.y == 0) && (currentAnimation != &attackAnim)) {
-		if (currentAnimation != &idleAnim) {
-			idleAnim.Reset();
-			currentAnimation = &idleAnim;
+
+		if ((vel.x == 0) && (vel.y == 0) && (currentAnimation != &attackAnim)) {
+			if (currentAnimation != &idleAnim) {
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
 		}
-	}
 
 		pbody->body->SetLinearVelocity(vel);
 
-	currentAnimation->Update();
+		currentAnimation->Update();
+
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			HandleAttack();
+			if ((currentAnimation == &attackAnim) && (currentAnimation->HasFinished())) {
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+		}
+
+		if (playerDead) {
+			currentAnimation = &dieAnim;
+			currentAnimation->Update();
+
+			app->physics->DestroyBody(pbody);
+			pbody = nullptr;
+		}
+
+		//Update player position in pixels
+		else {
+			position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+			position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 28;
+
+			SDL_Rect rect = currentAnimation->GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+		}
+
+		//Update camera position
+		//Lerp-smoothing camera
+		int centerX = app->win->screenSurface->w / 2;
+		int centerY = app->win->screenSurface->h / 2;
+		float t = 0.1f; // 0 -> +smooth, 1 -> -smooth
+
+		int targetX = centerX - position.x;
+		int targetY = centerY - position.y;
+
+		float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
+		float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
+
+		if ((centerX - position.x < 0) && (centerX - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
+		if ((centerY - position.y < 0) && (centerY - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
+	}
 
 	//Moves the player to the start
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		position.x = start.x;
-		position.y = start.y;
-
-		app->physics->DestroyBody(pbody);
-		pbody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
-		pbody->body->SetFixedRotation(true);
-		pbody->listener = this;
-		pbody->ctype = ColliderType::PLAYER;
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
+		iPoint camera;
+		camera.x = 0;
+		camera.y = 0;
+		PlayerToSavePoint(start, camera);
 	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		HandleAttack();
-		if ((currentAnimation == &attackAnim) && (currentAnimation->HasFinished())) {
-			idleAnim.Reset();
-			currentAnimation = &idleAnim;
-		}
-	}
-
-	//Update player position in pixels
-	else {
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 28;
-
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
-	}
-
-	//Update camera position
-	//Lerp-smoothing camera
-	int centerX = app->win->screenSurface->w / 2;
-	int centerY = app->win->screenSurface->h / 2;
-	float t = 0.1f; // 0 -> +smooth, 1 -> -smooth
-
-	int targetX = centerX - position.x;
-	int targetY = centerY - position.y;
-
-	float xLerp = app->render->camera.x + t * (targetX - app->render->camera.x);
-	float yLerp = app->render->camera.y + t * (targetY - app->render->camera.y);
-
-	if ((centerX - position.x < 0) && (centerX - position.x < app->map->mapData.width)) app->render->camera.x = xLerp;
-	if ((centerY - position.y < 0) && (centerY - position.y < app->map->mapData.height)) app->render->camera.y = yLerp;
 
 	return true;
 }
@@ -264,8 +268,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DAMAGE:
 		if (godMode == false) {
-			currentAnimation = &dieAnim;
-			currentAnimation->Update();
 			playerDead = true;
 		}
 		LOG("Collision DAMAGE");
@@ -299,4 +301,17 @@ void Player::HandleAttack() {
 		app->physics->DestroyBody(sensor);
 		sensor = nullptr;
 	}
+}
+
+void Player::PlayerToSavePoint(iPoint position, iPoint camera) {
+
+	app->physics->DestroyBody(pbody);
+
+	pbody = app->physics->CreateRectangle(position.x, position.y, 32, 60, bodyType::DYNAMIC);
+	pbody->body->SetFixedRotation(true);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::PLAYER;
+
+	app->render->camera.x = camera.x;
+	app->render->camera.y = camera.y;
 }

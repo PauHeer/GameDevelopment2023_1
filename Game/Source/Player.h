@@ -28,6 +28,8 @@ public:
 
 	void HandleAttack();
 
+	void PlayerToSavePoint(iPoint position, iPoint camera);
+
 public:
 	float speed = 0.35f;
 	const char* texturePath;

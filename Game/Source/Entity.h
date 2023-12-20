@@ -92,6 +92,7 @@ public:
 	iPoint position;
 	iPoint start;
 	bool renderable = true;
+	
 };
 
 #endif // __ENTITY_H__

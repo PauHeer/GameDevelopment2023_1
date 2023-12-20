@@ -29,13 +29,13 @@ bool Scene::Awake(pugi::xml_node& config)
 	// Check https://pugixml.org/docs/quickstart.html#access
 	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+		item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("shadow"); itemNode; itemNode = itemNode.next_sibling("shadow"))
 	{
-		Shadow* shadow = (Shadow*)app->entityManager->CreateEntity(EntityType::SHADOW);
+		shadow = (Shadow*)app->entityManager->CreateEntity(EntityType::SHADOW);
 		shadow->parameters = itemNode;
 	}
 
@@ -148,8 +148,18 @@ bool Scene::LoadState(pugi::xml_node node)
 	player->position.x = node.child("player").attribute("x").as_int();
 	player->position.y = node.child("player").attribute("y").as_int();
 	player->texturePath = node.child("player").attribute("texturepath").as_string();
+	iPoint camera;
+	camera.x = app->render->camera.x;
+	camera.y = app->render->camera.y;
+	player->PlayerToSavePoint(player->position, camera);
 
-	
+	bat->position.x = node.child("bat").attribute("x").as_int();
+	bat->position.y = node.child("bat").attribute("y").as_int();
+	bat->texturePath = node.child("player").attribute("texturepath").as_string();
+
+	shadow->position.x = node.child("shadow").attribute("x").as_int();
+	shadow->position.y = node.child("shadow").attribute("y").as_int();
+	shadow->texturePath = node.child("player").attribute("texturepath").as_string();
 
 	return true;
 }
@@ -160,6 +170,16 @@ bool Scene::SaveState(pugi::xml_node node)
 	playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
 	playerNode.append_attribute("texturepath").set_value(player->texturePath);
+
+	pugi::xml_node batNode = node.append_child("bat");
+	batNode.append_attribute("x").set_value(bat->position.x);
+	batNode.append_attribute("y").set_value(bat->position.y);
+	batNode.append_attribute("texturepath").set_value(bat->texturePath);
+
+	pugi::xml_node shadowNode = node.append_child("shadow");
+	shadowNode.append_attribute("x").set_value(shadow->position.x);
+	shadowNode.append_attribute("y").set_value(shadow->position.y);
+	shadowNode.append_attribute("texturepath").set_value(shadow->texturePath);
 
 	return true;
 }
