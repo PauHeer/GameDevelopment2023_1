@@ -272,6 +272,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		LOG("Collision DAMAGE");
 		break;
+	case ColliderType::SHADOW:
+		if (godMode == false) {
+			playerDead = true;
+		}
+		LOG("Collision SHADOW");
+		break;
+	case ColliderType::BAT:
+		if (godMode == false) {
+			playerDead = true;
+		}
+		LOG("Collision BAT");
+		break;
 	case ColliderType::DOOR:
 		if (haveKey == true) {
 			// Destruir el collider de la puerta
