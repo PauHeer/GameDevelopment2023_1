@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="361">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="362">
  <tileset firstgid="1" name="Collisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="3" columns="3">
   <image source="MapMetadata.png" width="100" height="34"/>
  </tileset>
@@ -101486,7 +101486,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="Collisions" width="96" height="96" visible="0">
+ <layer id="2" name="Collisions" width="96" height="96">
   <properties>
    <property name="Collisions" type="bool" value="true"/>
    <property name="Draw" type="bool" value="false"/>
@@ -110647,41 +110647,41 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
    <tile/>
    <tile/>
    <tile/>
@@ -119987,7 +119987,7 @@
   <object id="85" x="2272.33" y="1119.67" width="350.833" height="32.3333"/>
   <object id="86" x="2623.33" y="1152" width="192.083" height="32"/>
   <object id="87" x="896.333" y="1663.67" width="160" height="32.6667"/>
-  <object id="117" x="416.125" y="2527.75" width="52.375" height="32.375"/>
+  <object id="117" x="415.943" y="2527.75" width="52.5568" height="32.375"/>
   <object id="119" x="831.333" y="2304.33" width="53.3333" height="31.3333"/>
   <object id="213" x="2336.67" y="512" width="32" height="32"/>
   <object id="215" x="1792.59" y="1600" width="37.9091" height="31.5"/>
@@ -120015,7 +120015,7 @@
   <object id="302" x="2336.33" y="1568.67" width="31.3333" height="10.6667"/>
   <object id="303" x="2365.33" y="1599.33" width="353.333" height="16"/>
   <object id="309" x="2240" y="2881" width="543" height="15"/>
-  <object id="311" x="2785" y="2752" width="257" height="12"/>
+  <object id="311" x="2783" y="2752" width="259" height="12"/>
   <object id="315" x="2550.67" y="2272.67" width="490" height="7.33333"/>
   <object id="316" x="2166" y="2047" width="531" height="11"/>
   <object id="317" x="2882" y="2465" width="156" height="8"/>
@@ -120057,11 +120057,11 @@
   <object id="181" x="361.667" y="1015.66" width="22" height="30.3334"/>
   <object id="192" x="703.5" y="770" width="352.5" height="28.5"/>
   <object id="194" x="1056" y="736" width="30.5" height="44"/>
-  <object id="196" x="1215.5" y="736" width="32.5" height="42"/>
+  <object id="196" x="1216.77" y="736" width="31.2273" height="42"/>
   <object id="197" x="1247.5" y="768" width="1824.5" height="29.5"/>
-  <object id="198" x="1984" y="384.333" width="32" height="319.667"/>
+  <object id="198" x="1985" y="384.333" width="31" height="319.667"/>
   <object id="199" x="2272" y="384.667" width="30.6667" height="319.333"/>
-  <object id="201" x="2783.79" y="576.042" width="32.2083" height="127.958"/>
+  <object id="201" x="2785.46" y="576.042" width="30.5416" height="127.958"/>
   <object id="202" x="3040" y="0" width="32" height="544"/>
   <object id="204" x="1823.91" y="1120" width="32" height="544"/>
   <object id="206" x="960" y="2015.67" width="32.3333" height="256.667"/>
@@ -120073,7 +120073,7 @@
   <object id="217" x="413" y="977" width="21.6667" height="15.3333"/>
   <object id="218" x="384" y="992.333" width="28" height="23"/>
   <object id="219" x="690.5" y="1408.5" width="10.5" height="115.5"/>
-  <object id="224" x="2784" y="957.667" width="31" height="130"/>
+  <object id="224" x="2785.67" y="957.667" width="29.3333" height="130"/>
   <object id="228" x="2016" y="1779.33" width="32" height="11.3333"/>
   <object id="229" x="1984" y="1790.67" width="31.3333" height="32"/>
   <object id="230" x="1950" y="1822.67" width="32.6667" height="33.3333"/>
@@ -120130,7 +120130,8 @@
   <object id="347" x="496" y="1721.33" width="13.3333" height="53.3333"/>
   <object id="348" x="609" y="924" width="8.33333" height="35.6667"/>
   <object id="351" x="664.5" y="923.5" width="5" height="35.5"/>
-  <object id="352" x="672" y="735.5" width="28" height="47"/>
+  <object id="352" x="672.909" y="735.5" width="27.0909" height="47"/>
+  <object id="361" x="610" y="960" width="61" height="13"/>
  </objectgroup>
  <objectgroup id="23" name="Traps">
   <object id="90" x="1216.5" y="159.75">
