@@ -68,7 +68,10 @@ bool Bat::Update(float dt)
 			// Get the latest calculated path
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 			iPoint nextPoint = app->map->MapToWorld(path->At(0)->x, path->At(0)->y);
-			MoveTowards(nextPoint, dt);
+			moveTimer.Start();
+			if (moveTimer.ReadMSec() >= MOVE_DELAY_SECONDS) {
+				MoveTowards(nextPoint, dt);
+			}
 
 			// Draws the pathfinding
 			if (app->physics->debug) {
@@ -125,7 +128,8 @@ bool Bat::IsInRange(iPoint playerPos, iPoint enemyPos, int range) {
 	else return false;
 }
 
-void Bat::MoveTowards(const iPoint& destination, float dt) {/*
+void Bat::MoveTowards(const iPoint& destination, float dt) {
+	/*
 	iPoint direction;
 	direction.x = destination.x - position.x;
 	direction.y = destination.y - position.y;
@@ -141,6 +145,8 @@ void Bat::MoveTowards(const iPoint& destination, float dt) {/*
 	float speed = 0.05f;
 	position.x += direction.x * speed * dt;
 	position.y += direction.y * speed * dt;
+	*/
 
-	bat->body->SetTransform({ PIXEL_TO_METERS(position.x + 16), PIXEL_TO_METERS(position.y + 16) }, 0.0f);*/
+	b2Vec2 pos = b2Vec2(PIXEL_TO_METERS(destination.x), PIXEL_TO_METERS(destination.y));
+	bat->body->SetTransform(pos, 0.0f);
 }

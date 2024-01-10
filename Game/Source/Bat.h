@@ -4,7 +4,10 @@
 #include "Animation.h"
 #include "Entity.h"
 #include "Point.h"
+#include "Timer.h"
 #include "SDL/include/SDL.h"
+
+//#define MOVE_DELAY_SECONDS = 1.0f;	// Dealay duration for movement
 
 struct SDL_Texture;
 
@@ -40,6 +43,11 @@ public:
 	Animation* currentAnimation = NULL;
 
 	Animation idleAnim;
+
+private:
+
+	Timer moveTimer;							// Timer for controlling movement delay
+	float MOVE_DELAY_SECONDS = 1000.0f;
 };
 
 #endif // __BAT_H__
