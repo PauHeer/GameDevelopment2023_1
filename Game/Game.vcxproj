@@ -97,6 +97,9 @@
   <ItemGroup>
     <ClCompile Include="Source\Bat.cpp" />
     <ClCompile Include="Source\Checkpoint.cpp" />
+    <ClCompile Include="Source\GuiControl.h" />
+    <ClCompile Include="Source\GuiControlButton.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Shadow.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
@@ -117,6 +120,8 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Source\Bat.h" />
     <ClInclude Include="Source\Checkpoint.h" />
+    <ClInclude Include="Source\GuiControlButton.h" />
+    <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Shadow.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
