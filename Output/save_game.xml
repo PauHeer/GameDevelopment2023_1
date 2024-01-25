@@ -6,12 +6,13 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<player x="2831" y="1059" texturepath="Assets/Textures/_Idle.png" />
-		<bat x="29" y="284" texturepath="Assets/Textures/_Idle.png" />
+		<player x="96" y="644" texturepath="Assets/Textures/_Idle.png" />
+		<bat x="1392" y="2512" texturepath="Assets/Textures/bat.png" />
+		<shadow x="2512" y="2833" texturepath="Assets/Textures/enemy1.png" />
 	</scene>
 	<map />
 	<entitymanager />
 	<renderer>
-		<camera x="-2321" y="-651" />
+		<camera x="0" y="-251" />
 	</renderer>
 </game_state>

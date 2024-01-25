@@ -26,9 +26,8 @@
     <ClCompile Include="Source\Shadow.cpp" />
     <ClCompile Include="Source\Checkpoint.cpp" />
     <ClCompile Include="Source\Bat.cpp" />
-    <ClCompile Include="Source\GuiControlButton.cpp" />
-    <ClCompile Include="Source\GuiControl.h" />
     <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\GuiControlButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -79,8 +78,9 @@
     <ClInclude Include="Source\Shadow.h" />
     <ClInclude Include="Source\Checkpoint.h" />
     <ClInclude Include="Source\Bat.h" />
-    <ClInclude Include="Source\GuiControlButton.h" />
+    <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\GuiControlButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
