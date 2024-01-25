@@ -2,7 +2,7 @@
 #include "App.h"
 #include "Textures.h"
 
-#include "GuiControlButton.h"
+#include "GuiHud.h"
 #include "Audio.h"
 
 GuiManager::GuiManager() :Module()
@@ -26,7 +26,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
+		guiControl = new GuiHud(id, bounds, text);
 		break;
 	}
 

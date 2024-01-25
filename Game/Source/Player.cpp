@@ -317,4 +317,7 @@ void Player::PlayerToSavePoint(iPoint position, iPoint camera) {
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
+
+	app->render->camera.x = camera.x;
+	app->render->camera.y = camera.y;
 }

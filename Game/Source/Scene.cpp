@@ -88,10 +88,10 @@ bool Scene::Start()
 		app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.Count());
 
-	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
+	// L15: DONE 2: Instantiate a new GuiHealthBar in the Scene
 
-	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
-	gcButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+	SDL_Rect btPos = { 50, 50, 120,20 };
+	ghButton = (GuiHud*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Health", btPos, this);
 
 	app->audio->PlayMusic("Assets/Audio/Music/Goonies.ogg", 1.0f);
 

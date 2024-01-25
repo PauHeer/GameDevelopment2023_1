@@ -8,7 +8,7 @@
 #include "Bat.h"
 #include "Checkpoint.h"
 #include "GuiControl.h"
-#include "GuiControlButton.h"
+#include "GuiHud.h"
 
 struct SDL_Texture;
 
@@ -57,7 +57,7 @@ private:
 	Shadow* shadow;
 	Item* item;
 	PhysBody* checkp;
-	GuiControlButton* gcButton;
+	GuiHud* ghButton;
 
 };
 
